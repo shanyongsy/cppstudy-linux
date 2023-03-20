@@ -5,6 +5,9 @@
 #include "string.h"
 #include <list>
 #include <unistd.h>//sleep
+#include <thread>
+#include <pthread.h>
+#include "version.h"
 
 typedef unsigned long DWORD;
 
@@ -21,48 +24,81 @@ public:
 	int GetID(){ return id; }
 };
 
-int main()
+void tf()
 {
-	// // example : strncpy 测试
-	// char c1[] = "1234567890abcdefg";
-	// char c2[6] = {};
-	// strncpy(c2, c1, 6);
-	// c2[5] = '\0';
-	// std::string strInfo2 = c2;
-	// std::cout << "strInfo2 = " << strInfo2 << std::endl;
-	// std::string strInfo1 = c1;
-	// std::cout << "strInfo1 = " << strInfo1 << std::endl;
+	std::cout << "tf" << std::endl;
+};
 
-	// // example ： std:：count 测试
-	// for(int i = 0;i <10; i++)
-	// {
-	// 	std::cout << i << std::endl;
-	// }
+int main(int argc, char *argv[])
+{
+	// example : version
+	if(argc >= 2)
+	{
+		std::string in = argv[1];
+		if(in == "--version")
+		{
+			std::cout <<  PROJECT_VERSION << std::endl;
+			std::cout <<  PROGRAM_VERSION << std::endl;
+			return 0;
+		}
 
-	// // example ： inet_ntoa 测试
-	// for(int i = -10; i <= 10; i++)
-	// {
-	// 	DWORD ip = i;
-	// 	in_addr ia;
-	// 	ia.s_addr = ip;
-	// 	std::string strIP = inet_ntoa(ia);
-	// 	std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
-	// }
-	// for(int i = 65536; i <= 65546; i++)
-	// {
-	// 	DWORD ip = i;
-	// 	in_addr ia;
-	// 	ia.s_addr = ip;
-	// 	std::string strIP = inet_ntoa(ia);
-	// 	std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
-	// }
+	}
+
+	// example : argc argv
+	std::cout << argc << std::endl;
+	for(int i = 0; i < argc; i++)
+	{
+		std::cout << argv[i] << std::endl;
+	}
+
+	// // example : thread
+	// // ps: g++ helloworld.cpp -lpthread
+	// std::thread t(tf);
+	// t.join();
+
+	// example : strncpy 测试
+	char c1[] = "1234567890abcdefg";
+	char c2[6] = {};
+	strncpy(c2, c1, 6);
+	c2[5] = '\0';
+	std::string strInfo2 = c2;
+	std::cout << "strInfo2 = " << strInfo2 << std::endl;
+	std::string strInfo1 = c1;
+	std::cout << "strInfo1 = " << strInfo1 << std::endl;
+
+	// int* p = NULL;
+	// *p = 1;
+
+	// example ： std:：count 测试
+	for(int i = 0;i <10; i++)
+	{
+		std::cout << i << std::endl;
+	}
+
+	// example ： inet_ntoa 测试
+	for(int i = -10; i <= 10; i++)
+	{
+		DWORD ip = i;
+		in_addr ia;
+		ia.s_addr = ip;
+		std::string strIP = inet_ntoa(ia);
+		std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
+	}
+	for(int i = 65536; i <= 65546; i++)
+	{
+		DWORD ip = i;
+		in_addr ia;
+		ia.s_addr = ip;
+		std::string strIP = inet_ntoa(ia);
+		std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
+	}
 	
 	// example : char* 赋值 string 测试
-	{
-		const char* pInfo = NULL;
-		std::string strInfo1 = pInfo;
-		std::cout << strInfo1 << std::endl;
-	}
+	// {
+	// 	const char* pInfo = NULL;
+	// 	std::string strInfo1 = pInfo;
+	// 	std::cout << strInfo1 << std::endl;
+	// }
 	// 结论：
 	// 实验证明不可以将一个 NULL 赋值给 string.
 
