@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		std::string in = argv[1];
 		if(in == "--version")
 		{
-			std::cout <<  PROJECT_VERSION << std::endl;
+			// std::cout <<  PROJECT_VERSION << std::endl;
 			std::cout <<  PROGRAM_VERSION << std::endl;
 			return 0;
 		}
