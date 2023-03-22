@@ -9,29 +9,11 @@
 #include <pthread.h>
 
 #include "version.h"
-#include "checkptr.h"
+#include "func_declare.h"
+#include "struct_def.h"
 #include "memory"
 
 typedef unsigned long DWORD;
-
-class info
-{
-private:
-    const int id;
-    const std::string name;
-public:
-    info(int _id, const std::string& _name) : id(_id), name(_name) {}
-    info() : id(0), name("") {}
-    ~info(){ std::cout << "~info(), id is " << this->id << std::endl; };
-public:
-    int GetID() const { return id; }
-    const std::string& GetName() const { return name; }
-};
-
-void tf()
-{
-	std::cout << "tf" << std::endl;
-};
 
 int main(int argc, char *argv[])
 {
@@ -49,6 +31,8 @@ int main(int argc, char *argv[])
 
 	// example : auto ptr
 	std::shared_ptr<player_info> sp(new player_info());
+	sp->id = 1000;
+	sp->name = "小明";
 	weakptr_example(sp);
 
 	// // example : argc argv
