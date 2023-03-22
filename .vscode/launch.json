@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/sy/code/cppstudy",
-      "program": "/home/sy/code/cppstudy/helloworld",
+      "program": "/home/sy/code/cppstudy/hello",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
