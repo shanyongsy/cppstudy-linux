@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.12)
 project(studycpp VERSION 1.51.60.2 DESCRIPTION "This is my study cpp project" HOMEPAGE_URL "baidu.com")
 #project(studycpp DESCRIPTION "This is my study cpp project" HOMEPAGE_URL "baidu.com")
+include_directories(include)
+add_library(mylib ./checkptr.cpp)
 add_executable(hello ./main.cpp)
+target_link_libraries(hello mylib -lpthread)
 
 
 
@@ -12,20 +15,17 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION")
 else()
   message(FATAL_ERROR "File ${CMAKE_CURRENT_SOURCE_DIR}/VERSION not found")
 endif()
-
 #基于 version.h.in 生成 version.h
 configure_file(
   version.h.in
   generated/version.h
   @ONLY
 )
-
 # needs to find the generated header file
 target_include_directories(hello
 PRIVATE
   ${CMAKE_CURRENT_BINARY_DIR}/generated
 )
-
 message("CMAKE_PROJECT_VERSION = ${CMAKE_PROJECT_VERSION}")
 message("PROJECT_VERSION_MAJOR = ${PROJECT_VERSION_MAJOR}")
 message("PROJECT_VERSION_MINOR = ${PROJECT_VERSION_MINOR}")

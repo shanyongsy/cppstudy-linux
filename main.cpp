@@ -7,21 +7,25 @@
 #include <unistd.h>//sleep
 #include <thread>
 #include <pthread.h>
+
 #include "version.h"
+#include "checkptr.h"
+#include "memory"
 
 typedef unsigned long DWORD;
 
 class info
 {
 private:
-	/* data */
-	int id;
-	std::string name;
+    const int id;
+    const std::string name;
 public:
-	info(int _id){ id = _id; };
-	~info(){ std::cout << "~info(), id is " << this->id << std::endl; };
+    info(int _id, const std::string& _name) : id(_id), name(_name) {}
+    info() : id(0), name("") {}
+    ~info(){ std::cout << "~info(), id is " << this->id << std::endl; };
 public:
-	int GetID(){ return id; }
+    int GetID() const { return id; }
+    const std::string& GetName() const { return name; }
 };
 
 void tf()
@@ -41,57 +45,61 @@ int main(int argc, char *argv[])
 			std::cout <<  PROGRAM_VERSION << std::endl;
 			return 0;
 		}
-
 	}
 
-	// example : argc argv
-	std::cout << argc << std::endl;
-	for(int i = 0; i < argc; i++)
-	{
-		std::cout << argv[i] << std::endl;
-	}
+	// example : auto ptr
+	std::shared_ptr<player_info> sp(new player_info());
+	weakptr_example(sp);
+
+	// // example : argc argv
+	// std::cout << argc << std::endl;
+	// for(int i = 0; i < argc; i++)
+	// {
+	// 	std::cout << argv[i] << std::endl;
+	// }
 
 	// // example : thread
 	// // ps: g++ helloworld.cpp -lpthread
 	// std::thread t(tf);
 	// t.join();
 
-	// example : strncpy 测试
-	char c1[] = "1234567890abcdefg";
-	char c2[6] = {};
-	strncpy(c2, c1, 6);
-	c2[5] = '\0';
-	std::string strInfo2 = c2;
-	std::cout << "strInfo2 = " << strInfo2 << std::endl;
-	std::string strInfo1 = c1;
-	std::cout << "strInfo1 = " << strInfo1 << std::endl;
+	// // example : strncpy 测试
+	// char c1[] = "1234567890abcdefg";
+	// char c2[6] = {};
+	// strncpy(c2, c1, 6);
+	// c2[5] = '\0';
+	// std::string strInfo2 = c2;
+	// std::cout << "strInfo2 = " << strInfo2 << std::endl;
+	// std::string strInfo1 = c1;
+	// std::cout << "strInfo1 = " << strInfo1 << std::endl;
 
+	// // example : make a dump
 	// int* p = NULL;
 	// *p = 1;
 
-	// example ： std:：count 测试
-	for(int i = 0;i <10; i++)
-	{
-		std::cout << i << std::endl;
-	}
+	// // example ： std:：count 测试
+	// for(int i = 0;i <10; i++)
+	// {
+	// 	std::cout << i << std::endl;
+	// }
 
-	// example ： inet_ntoa 测试
-	for(int i = -10; i <= 10; i++)
-	{
-		DWORD ip = i;
-		in_addr ia;
-		ia.s_addr = ip;
-		std::string strIP = inet_ntoa(ia);
-		std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
-	}
-	for(int i = 65536; i <= 65546; i++)
-	{
-		DWORD ip = i;
-		in_addr ia;
-		ia.s_addr = ip;
-		std::string strIP = inet_ntoa(ia);
-		std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
-	}
+	// // example ： inet_ntoa 测试
+	// for(int i = -10; i <= 10; i++)
+	// {
+	// 	DWORD ip = i;
+	// 	in_addr ia;
+	// 	ia.s_addr = ip;
+	// 	std::string strIP = inet_ntoa(ia);
+	// 	std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
+	// }
+	// for(int i = 65536; i <= 65546; i++)
+	// {
+	// 	DWORD ip = i;
+	// 	in_addr ia;
+	// 	ia.s_addr = ip;
+	// 	std::string strIP = inet_ntoa(ia);
+	// 	std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
+	// }
 	
 	// example : char* 赋值 string 测试
 	// {

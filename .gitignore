@@ -6,3 +6,4 @@ hello
 main
 a.out
 Makefile
+*.a
