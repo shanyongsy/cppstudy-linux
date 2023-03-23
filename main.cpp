@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
 	std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));
 	// sp.reset();
 	weakptr_example(sp);
+	sleep(300);
 
 	// // example : argc argv
 	// std::cout << argc << std::endl;
