@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 	std::shared_ptr<player_info> sp(new player_info());
 	sp->id = 1000;
 	sp->name = "小明";
+	// sp.reset();
 	weakptr_example(sp);
 
 	// // example : argc argv
