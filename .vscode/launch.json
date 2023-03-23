@@ -5,11 +5,11 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [],
+      "args": ["--version"],
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/sy/code/cppstudy",
-      "program": "/home/sy/code/cppstudy/hello",
+      "program": "/home/sy/code/cppstudy/build/hello",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

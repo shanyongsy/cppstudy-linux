@@ -15,7 +15,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_BUILD_TYPE Debug) # 添加调试信息
 
 include_directories(include)
-# include_directories(generated)
 
 add_library(common ./checkptr.cpp)
 add_executable(hello ./main.cpp)

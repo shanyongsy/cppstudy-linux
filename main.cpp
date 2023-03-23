@@ -25,7 +25,6 @@ int main(int argc, char *argv[])
 		{
 			// std::cout <<  PROJECT_VERSION << std::endl;
 			std::cout <<  PROGRAM_VERSION << std::endl;
-			return 0;
 		}
 	}
 
