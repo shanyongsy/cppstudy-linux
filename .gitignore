@@ -7,3 +7,4 @@ main
 a.out
 Makefile
 *.a
+build/

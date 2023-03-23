@@ -30,9 +30,7 @@ int main(int argc, char *argv[])
 	}
 
 	// example : auto ptr
-	std::shared_ptr<player_info> sp(new player_info());
-	sp->id = 1000;
-	sp->name = "小明";
+	std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));
 	// sp.reset();
 	weakptr_example(sp);
 
@@ -109,7 +107,7 @@ int main(int argc, char *argv[])
 	// }
 	// else
 	// {
-	// 	std::cout << "sp is valiad" << std::endl;
+	// 	std::cout << "sp is valid" << std::endl;
 	// }
 	// p = new info(1);
 	// sp.reset(p);
@@ -119,7 +117,7 @@ int main(int argc, char *argv[])
 	// }
 	// else
 	// {
-	// 	std::cout << "sp is valiad" << std::endl;
+	// 	std::cout << "sp is valid" << std::endl;
 	// }
 	// auto *pList = new std::list<std::shared_ptr<info>>();
 	// pList->push_back(sp);

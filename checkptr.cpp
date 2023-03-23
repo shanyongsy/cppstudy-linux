@@ -2,13 +2,13 @@
 #include "struct_def.h"
 #include <iostream>
 
-void weakptr_example(std::weak_ptr<player_info> p)
+void weakptr_example(std::weak_ptr<PlayerInfo> p)
 {
-    std::shared_ptr<player_info> sp_a = p.lock();
+    std::shared_ptr<PlayerInfo> sp_a = p.lock();
     if (sp_a) {
         std::cout 
-        << "name\t: " << sp_a->name << std::endl
-        << "id\t: " << sp_a->id << std::endl;
+        << "name\t: " << sp_a->GetName() << std::endl
+        << "id\t: " << sp_a->GetID() << std::endl;
     }
 }
 

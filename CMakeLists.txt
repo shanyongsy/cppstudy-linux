@@ -1,8 +1,11 @@
 # 设置 cmake 的最低版本
 cmake_minimum_required(VERSION 3.12)
 
+# 输出路径
+message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+
 # 设置工程名和版本
-project(studycpp VERSION 1.51.60.2 DESCRIPTION "This is my study cpp project" HOMEPAGE_URL "baidu.com")
+project(hello VERSION 1.51.60.2 DESCRIPTION "This is my study cpp project" HOMEPAGE_URL "baidu.com")
 #project(studycpp DESCRIPTION "This is my study cpp project" HOMEPAGE_URL "baidu.com")
 
 # 指定 c++ 标准版本
@@ -12,6 +15,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_BUILD_TYPE Debug) # 添加调试信息
 
 include_directories(include)
+# include_directories(generated)
+
 add_library(common ./checkptr.cpp)
 add_executable(hello ./main.cpp)
 target_link_libraries(hello common -lpthread)
