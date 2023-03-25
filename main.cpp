@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
 	// ps: g++ helloworld.cpp -lpthread
 	std::thread t(example_tf);
 	t.join();
+	sleep(300);
 
 	// // example : strncpy 测试
 	// char c1[] = "1234567890abcdefg";
