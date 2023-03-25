@@ -7,16 +7,20 @@
 #include <unistd.h>//sleep
 #include <thread>
 #include <pthread.h>
+#include <csignal>
 
 #include "version.h"
 #include "func_declare.h"
 #include "struct_def.h"
 #include "memory"
 
+
 typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
+	signal(SIGUSR1, example_sighandler);
+
 	// example : version
 	if(argc >= 2)
 	{
@@ -31,7 +35,7 @@ int main(int argc, char *argv[])
 	// example : auto ptr
 	std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));
 	// sp.reset();
-	weakptr_example(sp);
+	example_weakptr(sp);
 	//sleep(300);
 
 	// // example : argc argv
@@ -41,10 +45,10 @@ int main(int argc, char *argv[])
 	// 	std::cout << argv[i] << std::endl;
 	// }
 
-	// // example : thread
-	// // ps: g++ helloworld.cpp -lpthread
-	// std::thread t(tf);
-	// t.join();
+	// example : thread
+	// ps: g++ helloworld.cpp -lpthread
+	std::thread t(example_tf);
+	t.join();
 
 	// // example : strncpy 测试
 	// char c1[] = "1234567890abcdefg";

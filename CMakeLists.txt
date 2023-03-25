@@ -12,11 +12,12 @@ project(hello VERSION 1.51.60.2 DESCRIPTION "This is my study cpp project" HOMEP
 # 指定为C++11 版本
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_BUILD_TYPE Debug) # 添加调试信息
+
+# 添加调试信息
+set(CMAKE_BUILD_TYPE Debug) 
 
 include_directories(include)
-
-add_library(common ./common/checkptr.cpp)
+add_library(common ./common/func_impl.cpp)
 add_executable(hello ./main.cpp)
 target_link_libraries(hello common -lpthread)
 
@@ -44,5 +45,25 @@ message("PROJECT_VERSION_MINOR = ${PROJECT_VERSION_MINOR}")
 message("PROJECT_VERSION_PATCH = ${PROJECT_VERSION_PATCH}")
 message("PROJECT_VERSION_TWEAK = ${PROJECT_VERSION_TWEAK}")
 message("PROJECT_VERSION = ${PROJECT_VERSION}")
+
+# # [gprof]添加 -pg 选项以启用 gprof 收集功能
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
+
+# # [gprof]编写自定义构建命令
+# add_custom_target(gprof
+#   COMMAND ${CMAKE_COMMAND} -E remove libhello.a hello
+#   COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=Debug ${PROJECT_SOURCE_DIR}/src
+#   COMMAND ${MAKE}
+#   COMMAND ${PROJECT_BINARY_DIR}/hello
+#   COMMAND ${CMAKE_COMMAND} -E remove gmon.out
+#   COMMAND ${CMAKE_COMMAND} -E env CPUPROFILE=gmon.out ./${PROJECT_BINARY_DIR}/hello
+#   COMMAND ${CMAKE_STRIP} --strip-debug ${PROJECT_BINARY_DIR}/hello
+#   COMMAND ${CMAKE_COMMAND} -E env GPROF_PATH=/usr/bin/gprof ${GPROF_PATH} ${PROJECT_BINARY_DIR}/hello gmon.out > ${PROJECT_BINARY_DIR}/gprof.out
+#   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+#   COMMENT "Running gprof"
+# )
+
+# # [gprof]将 gprof 命令添加到构建目标中
+# add_dependencies(gprof hello)
 
 

@@ -2,7 +2,7 @@
 #include "struct_def.h"
 #include <iostream>
 
-void weakptr_example(std::weak_ptr<PlayerInfo> p)
+void example_weakptr(std::weak_ptr<PlayerInfo> p)
 {
     std::shared_ptr<PlayerInfo> sp_a = p.lock();
     if (sp_a) {
@@ -12,7 +12,13 @@ void weakptr_example(std::weak_ptr<PlayerInfo> p)
     }
 }
 
-void tf()
+void example_tf()
 {
-	std::cout << "tf" << std::endl;
+	std::cout << "example_tf" << std::endl;
 };
+
+void example_sighandler(int signum)
+{
+    std::cout << "example_sighandler, signum=" << signum << std::endl; 
+    exit(0);
+}
