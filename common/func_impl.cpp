@@ -1,6 +1,8 @@
+#include <iostream>
+#include <csignal>
+
 #include "func_declare.h"
 #include "struct_def.h"
-#include <iostream>
 
 void example_weakptr(std::weak_ptr<PlayerInfo> p)
 {
@@ -17,8 +19,16 @@ void example_tf()
 	std::cout << "example_tf" << std::endl;
 };
 
-void example_sighandler(int signum)
+void signal_handler(int signum)
 {
-    std::cout << "example_sighandler, signum=" << signum << std::endl; 
-    exit(0);
+    std::cout << "Interrupt signal (" << signum << ") received." << std::endl;
+    exit(signum);
+}
+
+void example_signal_handler_register()
+{
+    signal(SIGINT,  signal_handler);
+	signal(SIGTERM, signal_handler);
+	signal(SIGQUIT, signal_handler);
+	signal(SIGKILL, signal_handler);
 }

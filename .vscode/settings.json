@@ -77,6 +77,8 @@
     "chrono": "cpp",
     "ctime": "cpp",
     "ratio": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "csignal": "cpp",
+    "cstring": "cpp"
   }
 }

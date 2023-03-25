@@ -7,19 +7,24 @@
 #include <unistd.h>//sleep
 #include <thread>
 #include <pthread.h>
-#include <csignal>
+
+#include "memory"
 
 #include "version.h"
 #include "func_declare.h"
 #include "struct_def.h"
-#include "memory"
-
+#include "http_server.h"
 
 typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	signal(SIGUSR1, example_sighandler);
+	// example : signal
+	example_signal_handler_register();
+
+	// example : start http server
+	std::thread t_http_server(http_server_run, 9000);
+	t_http_server.detach();
 
 	// example : version
 	if(argc >= 2)

@@ -5,7 +5,7 @@
       "name": "(gdb) Attach hello",
       "type": "cppdbg",
       "request": "attach",
-      "program": "/home/sy/code/cppstudy/build/hello",
+      "program": "/home/sy/code/cppstudy/hello",
       "MIMode": "gdb",
       "setupCommands": [
           {
@@ -28,7 +28,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/sy/code/cppstudy",
-      "program": "/home/sy/code/cppstudy/build/hello",
+      "program": "/home/sy/code/cppstudy/hello",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
