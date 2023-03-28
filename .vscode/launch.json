@@ -25,7 +25,8 @@
       "type": "cppdbg",
       "request": "launch",
       "args": [
-        "--version"
+        "--md5s",
+        "a"
       ],
       "stopAtEntry": false,
       "externalConsole": false,

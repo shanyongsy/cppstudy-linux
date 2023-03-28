@@ -79,6 +79,7 @@
     "ratio": "cpp",
     "thread": "cpp",
     "csignal": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "cinttypes": "cpp"
   }
 }

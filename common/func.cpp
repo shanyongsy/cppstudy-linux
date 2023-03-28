@@ -1,8 +1,11 @@
 #include <iostream>
 #include <csignal>
+#include <cstring>
+#include <sstream>
 
 #include "func.h"
 #include "struct_def.h"
+#include "md5c.h"
 
 void example_weakptr(std::weak_ptr<PlayerInfo> p)
 {
@@ -32,4 +35,124 @@ void example_signal_handler_register()
     signal(SIGTERM, signal_handler);
     signal(SIGQUIT, signal_handler);
     signal(SIGKILL, signal_handler);
+}
+
+void calculate_md5_example()
+{
+    static const char *const test[7] = {
+        "",                                                                                /*d41d8cd98f00b204e9800998ecf8427e*/
+        "a",                                                                               /*0cc175b9c0f1b6a831c399e269772661*/
+        "abc",                                                                             /*900150983cd24fb0d6963f7d28e17f72*/
+        "message digest",                                                                  /*f96b697d7cb7938d525a2f31aaf161d0*/
+        "abcdefghijklmnopqrstuvwxyz",                                                      /*c3fcd3d76192e4007dfb496cca67e13b*/
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",                  /*d174ab98d277d9f5a5611c2c9f419d9f*/
+        "12345678901234567890123456789012345678901234567890123456789012345678901234567890" /*57edf4a22be3c955ac49da2e2107b67a*/
+    };
+
+    int i;
+
+    for (i = 0; i < 7; ++i)
+    {
+        md5_state_t state;
+        md5_byte_t digest[16];
+        int di;
+
+        md5_init(&state);
+        md5_append(&state, (const md5_byte_t *)test[i], std::strlen(test[i]));
+        md5_finish(&state, digest);
+        printf("MD5 (\"%s\") = ", test[i]);
+        for (di = 0; di < 16; ++di)
+            printf("%02x", digest[di]);
+        printf("\n");
+    }
+}
+
+void calculate_string_md5(const std::string &in, std::string &out)
+{
+    // init
+    const int di = 16;
+    md5_state_t state;
+    md5_byte_t digest[di];
+
+    // calculate
+    md5_init(&state);
+    md5_append(&state, (const md5_byte_t *)in.c_str(), std::strlen(in.c_str()));
+    md5_finish(&state, digest);
+
+    // out info
+    {
+        // printf("MD5 (\"%s\") = ", test[i]);
+        // for (di = 0; di < 16; ++di)
+        //     printf("%02x ", digest[di]);
+        // printf("\n");
+
+        out = "";
+        char buff[512] = {};
+
+        sprintf(buff, "MD5 (\"%s\") = ", in.c_str());
+        out.append(buff);
+        for (int i = 0; i < di; ++i)
+        {
+            char buff[3] = {};
+            sprintf(buff, "%02x", digest[i]);
+            out.append(buff);
+        }
+        out.append("\n");
+    }
+}
+
+bool calculate_file_md5(const std::string &file, std::string &out)
+{
+    unsigned char ReadBuffer[65536];
+    size_t ReadBytes = 0;
+    md5_state_t state;
+    const int di = 16;
+    md5_byte_t digest[di];
+
+    md5_init(&state);
+
+    FILE *fp = fopen(file.c_str(), "rb");
+    if (!fp)
+        return false;
+
+    while (true)
+    {
+        ReadBytes = fread(ReadBuffer, 1, 65536, fp);
+        if (ReadBytes > 0)
+            md5_append(&state, (const md5_byte_t *)ReadBuffer, ReadBytes);
+
+        if (feof(fp))
+        {
+            md5_finish(&state, digest);
+            break;
+        }
+    }
+    fclose(fp);
+    fp = NULL;
+
+    // int i;
+    // printf("File %s:\n", file.c_str());
+    // printf("MD5 = ");
+    // for (i = 0; i < 16; i++)
+    //     printf("%02X ", digest[i]);
+    // printf("\n");
+
+    // print out
+    {
+        std::ostringstream oss;
+        oss << "file " << file << ":" << std::endl;
+        oss << "md5 = ";
+
+        for (int i = 0; i < di; i++)
+        {
+            char buff[3] = {};
+            sprintf(buff, "%02x", digest[i]);
+            oss << buff;
+        }
+
+        oss << std::endl;
+        out = oss.str();
+    }
+
+    return true;
 }

@@ -22,26 +22,55 @@ int main(int argc, char *argv[])
 	// example : signal
 	example_signal_handler_register();
 
-	// example : start http server
-	std::thread t_http_server(http_server_run, 9000);
-	t_http_server.detach();
+	// // example : start http server
+	// std::thread t_http_server(http_server_run, 9000);
+	// t_http_server.detach();
 
-	// example : version
-	if (argc >= 2)
+	// // example : version
+	// if (argc >= 2)
+	// {
+	// 	std::string option = argv[1];
+	// 	if (option == "--version")
+	// 	{
+	// 		// std::cout <<  PROJECT_VERSION << std::endl;
+	// 		std::cout << PROGRAM_VERSION << std::endl;
+	// 	}
+	// }
+
+	// // example : md5
+	// calculate_md5_example();
+
+	// // example : string md5
+	// if (argc >= 3)
+	// {
+	// 	std::string option = argv[1];
+	// 	if (option == "--md5s")
+	// 	{
+	// 		std::string value = argv[2];
+	// 		std::string out;
+	// 		calculate_string_md5(value, out);
+	// 		std::cout << out;
+	// 	}
+	// }
+
+	// example : file md5
+	if (argc >= 3)
 	{
-		std::string in = argv[1];
-		if (in == "--version")
+		std::string option = argv[1];
+		if (option == "--md5f")
 		{
-			// std::cout <<  PROJECT_VERSION << std::endl;
-			std::cout << PROGRAM_VERSION << std::endl;
+			std::string value = argv[2];
+			std::string out;
+			calculate_file_md5(value, out);
+			std::cout << out;
 		}
 	}
 
-	// example : auto ptr
-	std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));
-	// sp.reset();
-	example_weakptr(sp);
-	// sleep(300);
+	// // example : auto ptr
+	// std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));
+	// // sp.reset();
+	// example_weakptr(sp);
+	// // sleep(300);
 
 	// // example : argc argv
 	// std::cout << argc << std::endl;
@@ -50,11 +79,11 @@ int main(int argc, char *argv[])
 	// 	std::cout << argv[i] << std::endl;
 	// }
 
-	// example : thread
-	// ps: g++ helloworld.cpp -lpthread
-	std::thread t(example_tf);
-	t.join();
-	sleep(300);
+	// // example : thread
+	// // ps: g++ helloworld.cpp -lpthread
+	// std::thread t(example_tf);
+	// t.join();
+	// sleep(300);
 
 	// // example : strncpy 测试
 	// char c1[] = "1234567890abcdefg";
