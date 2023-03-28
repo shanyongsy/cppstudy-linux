@@ -87,15 +87,15 @@ void calculate_string_md5(const std::string &in, std::string &out)
         // printf("\n");
 
         out = "";
-        char buff[512] = {};
+        char buff_large[512] = {};
 
-        sprintf(buff, "MD5 (\"%s\") = ", in.c_str());
-        out.append(buff);
+        sprintf(buff_large, "MD5 (\"%s\") = ", in.c_str());
+        out.append(buff_large);
         for (int i = 0; i < di; ++i)
         {
-            char buff[3] = {};
-            sprintf(buff, "%02x", digest[i]);
-            out.append(buff);
+            char buff_out[3] = {};
+            sprintf(buff_out, "%02x", digest[i]);
+            out.append(buff_out);
         }
         out.append("\n");
     }
@@ -145,9 +145,9 @@ bool calculate_file_md5(const std::string &file, std::string &out)
 
         for (int i = 0; i < di; i++)
         {
-            char buff[3] = {};
-            sprintf(buff, "%02x", digest[i]);
-            oss << buff;
+            char buff_out[3] = {};
+            sprintf(buff_out, "%02x", digest[i]);
+            oss << buff_out;
         }
 
         oss << std::endl;
