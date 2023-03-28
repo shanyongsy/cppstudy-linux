@@ -5,7 +5,7 @@
       "name": "(gdb) Attach",
       "type": "cppdbg",
       "request": "attach",
-      "program": "${workspaceFolder}/hello",
+      "program": "${workspaceFolder}/build/hello",
       "MIMode": "gdb",
       "setupCommands": [
         {
@@ -31,7 +31,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "${workspaceFolder}",
-      "program": "${workspaceFolder}/hello",
+      "program": "${workspaceFolder}/build/hello",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
