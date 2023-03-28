@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_BUILD_TYPE Debug) 
 
 include_directories(include)
-add_library(common ./common/func_impl.cpp ./common/http_server.cpp)
+add_library(common ./common/func.cpp ./common/http_server.cpp)
 add_executable(hello ./main.cpp)
 target_link_libraries(hello common -lpthread)
 

@@ -4,14 +4,14 @@
 #include <string>
 #include "string.h"
 #include <list>
-#include <unistd.h>//sleep
+#include <unistd.h> //sleep
 #include <thread>
 #include <pthread.h>
 
 #include "memory"
 
 #include "version.h"
-#include "func_declare.h"
+#include "func.h"
 #include "struct_def.h"
 #include "http_server.h"
 
@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
 	t_http_server.detach();
 
 	// example : version
-	if(argc >= 2)
+	if (argc >= 2)
 	{
 		std::string in = argv[1];
-		if(in == "--version")
+		if (in == "--version")
 		{
 			// std::cout <<  PROJECT_VERSION << std::endl;
-			std::cout <<  PROGRAM_VERSION << std::endl;
+			std::cout << PROGRAM_VERSION << std::endl;
 		}
 	}
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));
 	// sp.reset();
 	example_weakptr(sp);
-	//sleep(300);
+	// sleep(300);
 
 	// // example : argc argv
 	// std::cout << argc << std::endl;
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 	// 	std::string strIP = inet_ntoa(ia);
 	// 	std::cout << "ip=" << ip << ",strIP=" << strIP << std::endl;
 	// }
-	
+
 	// example : char* 赋值 string 测试
 	// {
 	// 	const char* pInfo = NULL;
@@ -155,5 +155,4 @@ int main(int argc, char *argv[])
 	// }
 	// sleep(10);
 	// delete pList;
-
 }
