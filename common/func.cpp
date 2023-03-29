@@ -2,6 +2,7 @@
 #include <csignal>
 #include <cstring>
 #include <sstream>
+#include <vector>
 
 #include "func.h"
 #include "struct_def.h"
@@ -87,17 +88,15 @@ void calculate_string_md5(const std::string &in, std::string &out)
         // printf("\n");
 
         out = "";
-        char buff_large[512] = {};
-
-        sprintf(buff_large, "MD5 (\"%s\") = ", in.c_str());
-        out.append(buff_large);
+        // char buff_large[512] = {};
+        // sprintf(buff_large, "MD5 (\"%s\") = ", in.c_str());
+        // out.append(buff_large);
         for (int i = 0; i < di; ++i)
         {
             char buff_out[3] = {};
             sprintf(buff_out, "%02x", digest[i]);
             out.append(buff_out);
         }
-        out.append("\n");
     }
 }
 
@@ -155,4 +154,78 @@ bool calculate_file_md5(const std::string &file, std::string &out)
     }
 
     return true;
+}
+
+std::vector<std::string> split(const std::string &str, char delimiter)
+{
+    std::vector<std::string> result;
+    std::istringstream iss(str);
+    std::string token;
+
+    while (std::getline(iss, token, delimiter))
+    {
+        result.push_back(token);
+    }
+
+    return result;
+}
+
+void split_string()
+{
+    if (false)
+    {
+        std::string str = "hello,world,how,are,you";
+        std::vector<std::string> parts = split(str, ',');
+        std::cout << str << std::endl;
+        std::cout << parts.size() << std::endl;
+        for (const auto &part : parts)
+        {
+            std::cout << part << std::endl;
+        }
+        std::cout << std::endl;
+    }
+
+    if (false)
+    {
+        std::string str = "";
+        std::vector<std::string> parts = split(str, ',');
+        std::cout << str << std::endl;
+        std::cout << parts.size() << std::endl;
+        for (const auto &part : parts)
+        {
+            std::cout << part << std::endl;
+        }
+        std::cout << std::endl;
+    }
+
+    if (false)
+    {
+        std::string str = "hello";
+        std::vector<std::string> parts = split(str, ',');
+        std::cout << str << std::endl;
+        std::cout << parts.size() << std::endl;
+        for (const auto &part : parts)
+        {
+            std::cout << part << std::endl;
+        }
+        std::cout << std::endl;
+    }
+
+    if (false)
+    {
+        std::vector<std::string> parts;
+        std::cout << parts.empty() << std::endl;
+        std::cout << parts.size() << std::endl;
+    }
+
+    {
+        char info[] = "hello world";
+        std::string s_info;
+        s_info.assign(info, 32);
+        std::cout << s_info.c_str() << std::endl;
+
+        std::string s_info_short;
+        s_info_short.assign(info, 3);
+        std::cout << s_info_short << std::endl;
+    }
 }

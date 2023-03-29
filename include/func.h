@@ -20,3 +20,6 @@ void calculate_string_md5(const std::string &in, std::string &out);
 
 // make md5 for file
 bool calculate_file_md5(const std::string &file, std::string &out);
+
+// split string
+void split_string();

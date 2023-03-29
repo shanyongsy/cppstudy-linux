@@ -14,6 +14,7 @@
 #include "func.h"
 #include "struct_def.h"
 #include "http_server.h"
+#include "encrypt.h"
 
 typedef unsigned long DWORD;
 
@@ -21,6 +22,12 @@ int main(int argc, char *argv[])
 {
 	// example : signal
 	example_signal_handler_register();
+
+	// example : encrypt
+	test_encrypt();
+
+	// // example : split
+	// split_string();
 
 	// // example : start http server
 	// std::thread t_http_server(http_server_run, 9000);
@@ -49,22 +56,42 @@ int main(int argc, char *argv[])
 	// 		std::string value = argv[2];
 	// 		std::string out;
 	// 		calculate_string_md5(value, out);
-	// 		std::cout << out;
+
+	// 		std::cout << value << ":\n"
+	// 				  << out << std::endl
+	// 				  << std::endl;
+	// 		char md5_1[64] = {};
+	// 		strncpy(md5_1, out.c_str(), out.size());
+	// 		std::cout << "strncpy:\n"
+	// 				  << md5_1 << std::endl
+	// 				  << std::endl;
+	// 		char md5_2[64] = {};
+	// 		out.copy(md5_2, out.size());
+	// 		std::cout << "std::string.copy:\n"
+	// 				  << md5_2 << std::endl
+	// 				  << std::endl;
+
+	// 		std::cout << "std::string.capacity:\n"
+	// 				  << out.capacity() << std::endl;
+	// 		std::cout << "std::string.size:\n"
+	// 				  << out.size() << std::endl;
+	// 		std::cout << "std::string.length:\n"
+	// 				  << out.length() << std::endl;
 	// 	}
 	// }
 
-	// example : file md5
-	if (argc >= 3)
-	{
-		std::string option = argv[1];
-		if (option == "--md5f")
-		{
-			std::string value = argv[2];
-			std::string out;
-			calculate_file_md5(value, out);
-			std::cout << out;
-		}
-	}
+	// // example : file md5
+	// if (argc >= 3)
+	// {
+	// 	std::string option = argv[1];
+	// 	if (option == "--md5f")
+	// 	{
+	// 		std::string value = argv[2];
+	// 		std::string out;
+	// 		calculate_file_md5(value, out);
+	// 		std::cout << out;
+	// 	}
+	// }
 
 	// // example : auto ptr
 	// std::shared_ptr<PlayerInfo> sp(new PlayerInfo("小明", 1000));

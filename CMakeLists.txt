@@ -18,10 +18,12 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include_directories(include)
 include_directories(include/md5)
+include_directories(include/encrypt)
 add_library(common ./common/func.cpp ./common/http_server.cpp)
 add_library(md5 ./common/md5/md5.cpp ./common/md5/md5c.c)
+add_library(encrypt ./common/md5/md5.cpp ./common/encrypt/encrypt.cpp)
 add_executable(hello ./main.cpp)
-target_link_libraries(hello common md5 -lpthread)
+target_link_libraries(hello common md5 encrypt -lpthread)
 
 # 从文件中读取版本信息,将内容读入 PROGRAM_VERSION 变量中，该变量会去掉尾部的空格。当设置了变量 PROGRAM_VERSION ，就可以使用它来配置 version.hpp.in ，生成 generated/version.hpp 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION")
