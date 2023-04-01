@@ -15,6 +15,7 @@
 #include "struct_def.h"
 #include "http_server.h"
 #include "encrypt.h"
+#include "boost.h"
 
 typedef unsigned long DWORD;
 
@@ -23,8 +24,12 @@ int main(int argc, char *argv[])
 	// example : signal
 	example_signal_handler_register();
 
-	// example : encrypt
-	test_encrypt();
+	// example : boost
+	// example_boost_tokenizer();
+	example_boost_format();
+
+	// // example : encrypt
+	// test_encrypt();
 
 	// // example : split
 	// split_string();

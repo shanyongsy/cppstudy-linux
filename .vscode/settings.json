@@ -80,6 +80,7 @@
     "thread": "cpp",
     "csignal": "cpp",
     "cstring": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "*.ipp": "cpp"
   }
 }

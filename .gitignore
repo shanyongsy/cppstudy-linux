@@ -1,10 +1,10 @@
-CMakeFiles/
-generated/
-cmake_install.cmake
-CMakeCache.txt
-hello
-main
-a.out
-Makefile
-*.a
-build/
+# CMakeFiles/
+# generated/
+# cmake_install.cmake
+# CMakeCache.txt
+# hello
+# main
+# a.out
+# Makefile
+# /*.a
+/build
