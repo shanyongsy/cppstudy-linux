@@ -45,4 +45,6 @@ int test_encrypt()
 
     decrypt(str, len);
     std::cout << "decrypted: " << str << std::endl;
+
+    return len;
 }
