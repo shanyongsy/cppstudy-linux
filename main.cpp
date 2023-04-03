@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
 	// example : boost
 	// example_boost_tokenizer();
 	// example_boost_format();
-	example_std_splite();
+	// example_std_splite();
+	example_boost_splite();
 
 	// // example : encrypt
 	// test_encrypt();
