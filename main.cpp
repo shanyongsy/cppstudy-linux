@@ -16,6 +16,7 @@
 #include "http_server.h"
 #include "encrypt.h"
 #include "boost.h"
+#include "system.h"
 
 typedef unsigned long DWORD;
 
@@ -24,11 +25,14 @@ int main(int argc, char *argv[])
 	// example : signal
 	example_signal_handler_register();
 
+	// example : system
+	example_system();
+
 	// example : boost
 	// example_boost_tokenizer();
 	// example_boost_format();
 	// example_std_splite();
-	example_boost_splite();
+	// example_boost_splite();
 
 	// // example : encrypt
 	// test_encrypt();
@@ -119,8 +123,11 @@ int main(int argc, char *argv[])
 	// t.join();
 	// sleep(300);
 
-	// // example : strncpy 测试
-	// char c1[] = "1234567890abcdefg";
+	// example : strncpy 测试
+	char c1[] = "123";
+	std::string strlog = "";
+	strlog.append(c1, 5);
+	std::cout << strlog << std::endl;
 	// char c2[6] = {};
 	// strncpy(c2, c1, 6);
 	// c2[5] = '\0';
