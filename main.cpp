@@ -124,10 +124,10 @@ int main(int argc, char *argv[])
 	// sleep(300);
 
 	// example : strncpy 测试
-	char c1[] = "123";
-	std::string strlog = "";
-	strlog.append(c1, 5);
-	std::cout << strlog << std::endl;
+	// char c1[] = "123";
+	// std::string strlog = "";
+	// strlog.append(c1, 5);
+	// std::cout << strlog << std::endl;
 	// char c2[6] = {};
 	// strncpy(c2, c1, 6);
 	// c2[5] = '\0';
