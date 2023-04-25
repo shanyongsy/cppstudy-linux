@@ -229,3 +229,35 @@ void split_string()
         std::cout << s_info_short << std::endl;
     }
 }
+
+std::string mac_to_hex_string(const char* value, size_t len) {
+
+    std::cout << "len = " << len << std::endl;
+
+    std::string hex_string;
+    hex_string.resize(len * 2);
+
+    std::sprintf(&hex_string[0], "%02x", static_cast<unsigned char>(value[0]));
+    for (size_t i = 1; i < len; ++i) {
+        std::sprintf(&hex_string[i * 2], "%02x", static_cast<unsigned char>(value[i]));
+    }
+
+    return hex_string;
+}
+
+void test_mac_to_hex_string()
+{
+    std::string mac = "1234567";
+    std::string mac_hex = mac_to_hex_string(mac.c_str(), mac.size());
+    std::cout << mac_hex << std::endl;
+
+    const char* mac1 = "\x00\x11\x22\x33\x44\x55";
+    const char* mac2 = "\xaa\xbb\xcc\xdd\xee\xff";
+    const char* mac3 = "\x01\x23\x45\x67\x89\xab\xcd\xef";
+    const char* mac4 = "中华人名共和国shi伟大的民族中华人名共和国shi伟大的民族";
+
+    std::cout << mac_to_hex_string(mac1, sizeof(mac1)) << std::endl;
+    std::cout << mac_to_hex_string(mac2, sizeof(mac2)) << std::endl;
+    std::cout << mac_to_hex_string(mac3, sizeof(mac3)) << std::endl;
+    std::cout << mac_to_hex_string(mac4, sizeof(mac4)) << std::endl;
+}

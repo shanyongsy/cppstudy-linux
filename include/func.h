@@ -23,3 +23,8 @@ bool calculate_file_md5(const std::string &file, std::string &out);
 
 // split string
 void split_string();
+
+// test_mac_to_hex_string
+void test_mac_to_hex_string();
+
+

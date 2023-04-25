@@ -25,8 +25,11 @@ int main(int argc, char *argv[])
 	// example : signal
 	example_signal_handler_register();
 
+	// test_mac_to_hex_string();
+	test_mac_to_hex_string();
+
 	// example : system
-	example_system();
+	// example_system();
 
 	// example : boost
 	// example_boost_tokenizer();

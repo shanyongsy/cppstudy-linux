@@ -92,3 +92,7 @@ void http_server_run(int port)
     int server_fd = create_socket(port);
     accept_http_connections(server_fd);
 }
+
+// 4.测试。在代码中编写测试代码，启动 HTTP 服务，然后使用浏览器访问服务，查看响应结果。
+
+
