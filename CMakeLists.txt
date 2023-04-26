@@ -23,6 +23,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
 
 # 三方库 include
 # include_directories(third/openssl/include)
+include_directories(third)
 include_directories(third/boost/include)
 
 # 三方库 lib

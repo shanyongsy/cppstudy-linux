@@ -27,4 +27,7 @@ void split_string();
 // test_mac_to_hex_string
 void test_mac_to_hex_string();
 
+// test_reportmsg
+void test_reportmsg();
+
 

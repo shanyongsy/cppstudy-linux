@@ -17,6 +17,7 @@
 #include "encrypt.h"
 #include "boost.h"
 #include "system.h"
+#include "stringopt.h"
 
 typedef unsigned long DWORD;
 
@@ -25,8 +26,22 @@ int main(int argc, char *argv[])
 	// example : signal
 	example_signal_handler_register();
 
+	test_reportmsg();
+
+	// test key_value_to_string
+	// {
+	// 	std::cout << key_value_to_string(std::string("name").c_str(), "sy")
+	// 	<< key_value_to_string("name1", "sy")
+	// 	<< key_value_to_string("name2", "sy")
+	// 	<< key_value_to_string("age", 18)
+	// 	<< key_value_to_string("value", 16.7)
+	// 	<< key_value_to_string("姓名", "单勇")
+	// 	<< key_value_to_string("国家", "中华人民共和国")
+	// 	<< key_value_to_string("等级", 0, "");
+	// }
+
+	// example : mac to hex string
 	// test_mac_to_hex_string();
-	test_mac_to_hex_string();
 
 	// example : system
 	// example_system();
@@ -127,17 +142,19 @@ int main(int argc, char *argv[])
 	// sleep(300);
 
 	// example : strncpy 测试
-	// char c1[] = "123";
+	// char c1[] = "123456789";
 	// std::string strlog = "";
 	// strlog.append(c1, 5);
 	// std::cout << strlog << std::endl;
 	// char c2[6] = {};
-	// strncpy(c2, c1, 6);
+	// strncpy(c2, c1, sizeof(c2) - 1);
 	// c2[5] = '\0';
 	// std::string strInfo2 = c2;
 	// std::cout << "strInfo2 = " << strInfo2 << std::endl;
 	// std::string strInfo1 = c1;
 	// std::cout << "strInfo1 = " << strInfo1 << std::endl;
+	// std::cout << strlen(c1) << std::endl;
+	// std::cout << strlen(c2) << std::endl;
 
 	// // example : make a dump
 	// int* p = NULL;

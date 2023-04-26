@@ -3,10 +3,12 @@
 #include <cstring>
 #include <sstream>
 #include <vector>
+#include <cassert>
 
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
+
 
 void example_weakptr(std::weak_ptr<PlayerInfo> p)
 {
@@ -260,4 +262,82 @@ void test_mac_to_hex_string()
     std::cout << mac_to_hex_string(mac2, sizeof(mac2)) << std::endl;
     std::cout << mac_to_hex_string(mac3, sizeof(mac3)) << std::endl;
     std::cout << mac_to_hex_string(mac4, sizeof(mac4)) << std::endl;
+}
+
+#pragma	pack(push, 1)
+struct CLIENT_EXTEND_HEADER
+{
+    unsigned char	ProtocolID;
+    uint16_t	    wLength;
+    unsigned char	ProtocalType;
+    void	SetProtocolHeader(unsigned char byProtocol, uint16_t wLen)
+    {
+        ProtocolID = 190;
+        ProtocalType = byProtocol;
+        wLength = wLen;
+    };
+};
+
+struct REPORT_MSG : CLIENT_EXTEND_HEADER
+{
+    unsigned char	reportLevel;		// REPORT_LEVEL
+    unsigned char	reportType;			// REPORT_TYPE
+    uint16_t	    msgSize;			// the size of msgContent
+    char		    msgContent[0];
+
+public:
+    REPORT_MSG()
+    {
+        reportLevel = 0;
+        reportType = 0;
+        msgSize = 0;
+    }
+};
+#pragma	pack(pop)
+
+void report_msg(int level, int type, const char* content)
+{
+    // 模拟发送
+    const size_t maxSendLength = 1024;
+	const size_t nSendLength = strlen(content);
+	if (nSendLength > maxSendLength - sizeof(REPORT_MSG) - 1)
+		return;
+
+	char szBuf[maxSendLength];
+	std::memset(szBuf, 0, sizeof(szBuf));
+	REPORT_MSG* sendMsg = (REPORT_MSG*)szBuf;
+
+	sendMsg->reportLevel = (unsigned char)(level);
+	sendMsg->reportType = (unsigned char)(type);
+	sprintf(sendMsg->msgContent, "%s", content);
+	sendMsg->msgSize = strlen(sendMsg->msgContent);
+
+    size_t wLength = sizeof(REPORT_MSG) + sendMsg->msgSize + 1 - 1;
+    sendMsg->SetProtocolHeader(80, wLength);
+    const size_t nSendSize = wLength + 1;
+
+    // 模拟接收
+    char revBuf[maxSendLength];
+    const size_t nRevSize = sizeof(REPORT_MSG) + sendMsg->msgSize + 1;
+
+    assert(nSendSize == nRevSize);
+
+    std::memcpy(revBuf, szBuf, nRevSize);
+    REPORT_MSG* msg = (REPORT_MSG*)szBuf;
+    std::cout << msg->msgContent << std::endl;
+
+    char msgBuf[maxSendLength];
+    std::memcpy(msgBuf, msg->msgContent, msg->msgSize);
+    msgBuf[msg->msgSize] = '\0';
+    std::cout << msgBuf << std::endl;
+    
+}
+
+void test_reportmsg()
+{
+    char content[] = "[NpcSet.Add]Err.Reason=failed to findfree,kind=3,id=1822,setidx=12320769,x=47085,y=32097";
+    char sendbuf[300];
+    memset(sendbuf, 0, sizeof(sendbuf));
+    sprintf(sendbuf, "%s", content);
+    report_msg(11, 22, sendbuf);
 }
