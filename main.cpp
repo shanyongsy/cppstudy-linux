@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	// example : signal
 	example_signal_handler_register();
 
-	test_reportmsg();
+	//test_reportmsg();
 
 	// test key_value_to_string
 	// {
@@ -39,6 +39,28 @@ int main(int argc, char *argv[])
 	// 	<< key_value_to_string("国家", "中华人民共和国")
 	// 	<< key_value_to_string("等级", 0, "");
 	// }
+
+	// test generateKeyValueString
+	// std::cout << generateKeyValueString("name1", "sy", "nam2", "sy", "age", 18, "value", 16.7, "姓名", "单勇", "国家", "中华人民共和国", "等级", 0) << std::endl;
+	// std::string key1 = "name1";
+	// std::string value1 = "sy";
+	// std::string key2 = "name2";
+	// std::string value2 = "sy";
+	// std::string key3 = "age";
+	// int value3 = 18;
+	// std::string key4 = "value";
+	// double value4 = 16.7;
+	// std::string key5 = "姓名";
+	// std::string value5 = "单勇";
+	// std::cout << generateKeyValueString(
+	// 	key1, "sy", 
+	// 	key2, value2, 
+	// 	key3, value3, 
+	// 	key4, value4, 
+	// 	key5, value5) 
+	// 	<< std::endl;
+	// std::cout << generateKeyValueString("na", value1, key2, 0, key3, value3, key4, value4, key5, value5) << std::endl;
+
 
 	// example : mac to hex string
 	// test_mac_to_hex_string();
@@ -142,10 +164,10 @@ int main(int argc, char *argv[])
 	// sleep(300);
 
 	// example : strncpy 测试
-	// char c1[] = "123456789";
-	// std::string strlog = "";
-	// strlog.append(c1, 5);
-	// std::cout << strlog << std::endl;
+	char c1[] = "123456789";
+	std::string strlog = "";
+	strlog.append(c1, 5);
+	std::cout << strlog << std::endl;
 	// char c2[6] = {};
 	// strncpy(c2, c1, sizeof(c2) - 1);
 	// c2[5] = '\0';
