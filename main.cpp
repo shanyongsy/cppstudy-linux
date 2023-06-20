@@ -18,13 +18,28 @@
 #include "boost.h"
 #include "system.h"
 #include "stringopt.h"
+#include "rename.h"
 
 typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
+	rename_all_file();
+
 	// example : signal
-	example_signal_handler_register();
+	//example_signal_handler_register();
+
+	//fsb_MapToPoint(51936,102656);
+
+	// g_GetLocalTimeString(0);
+	// g_GetLocalTimeString(-1);
+	// time_t long_time;
+	// time( &long_time ); 
+	// g_GetLocalTimeString(long_time);
+	// long_time += 3600;
+	// g_GetLocalTimeString(long_time);
+
+	//id_level_value();
 
 	//test_reportmsg();
 
@@ -40,8 +55,10 @@ int main(int argc, char *argv[])
 	// 	<< key_value_to_string("等级", 0, "");
 	// }
 
-	// test generateKeyValueString
-	// std::cout << generateKeyValueString("name1", "sy", "nam2", "sy", "age", 18, "value", 16.7, "姓名", "单勇", "国家", "中华人民共和国", "等级", 0) << std::endl;
+	//test generateKeyValueString
+
+	//std::cout << generateKeyValueString("name1", "sy", "nam2", "sy", "age", 18, "value", 16.7, "姓名", "单勇", "国家", "中华人民共和国", "等级", 0, "备注", 0.01) << std::endl;
+
 	// std::string key1 = "name1";
 	// std::string value1 = "sy";
 	// std::string key2 = "name2";
@@ -59,6 +76,7 @@ int main(int argc, char *argv[])
 	// 	key4, value4, 
 	// 	key5, value5) 
 	// 	<< std::endl;
+
 	// std::cout << generateKeyValueString("na", value1, key2, 0, key3, value3, key4, value4, key5, value5) << std::endl;
 
 
@@ -164,10 +182,10 @@ int main(int argc, char *argv[])
 	// sleep(300);
 
 	// example : strncpy 测试
-	char c1[] = "123456789";
-	std::string strlog = "";
-	strlog.append(c1, 5);
-	std::cout << strlog << std::endl;
+	// char c1[] = "123456789";
+	// std::string strlog = "";
+	// strlog.append(c1, 5);
+	// std::cout << strlog << std::endl;
 	// char c2[6] = {};
 	// strncpy(c2, c1, sizeof(c2) - 1);
 	// c2[5] = '\0';

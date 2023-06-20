@@ -30,4 +30,9 @@ void test_mac_to_hex_string();
 // test_reportmsg
 void test_reportmsg();
 
+//
+void id_level_value();
 
+std::string g_GetLocalTimeString(const time_t& t);
+
+void fsb_MapToPoint(int x, int y);

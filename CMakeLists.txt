@@ -36,6 +36,7 @@ include_directories(include/md5)
 include_directories(include/encrypt)
 include_directories(include/boost)
 include_directories(include/system)
+include_directories(include/rename)
 
 # 本地库 lib
 add_library(my_common ./common/func.cpp ./common/http_server.cpp)
@@ -43,13 +44,14 @@ add_library(my_md5 ./common/md5/md5.cpp ./common/md5/md5c.c)
 add_library(my_encrypt ./common/md5/md5.cpp ./common/encrypt/encrypt.cpp)
 add_library(my_boost ./common/boost/boost.cpp)
 add_library(my_system ./common/system/system.cpp)
+add_library(my_rename ./common/rename/rename.cpp)
 
 # add_library(https ./common/https/httpsserver.cpp)
 add_executable(hello ./main.cpp)
 
 # 目标文件
 # target_link_libraries(hello common md5 encrypt pthread -lssl -lcrypto)
-target_link_libraries(hello my_common my_md5 my_encrypt my_boost my_system -lpthread)
+target_link_libraries(hello my_common my_md5 my_encrypt my_boost my_system my_rename -lpthread)
 
 # link_directories()
 

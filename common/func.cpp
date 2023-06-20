@@ -341,3 +341,76 @@ void test_reportmsg()
     sprintf(sendbuf, "%s", content);
     report_msg(11, 22, sendbuf);
 }
+
+typedef unsigned long       DWORD;
+typedef unsigned short      WORD;
+typedef unsigned int        UINT;
+typedef unsigned int        UINT_PTR;
+typedef unsigned long       ULONG_PTR;
+typedef ULONG_PTR           DWORD_PTR;
+typedef long LONG;
+
+#define MAKELONG(a, b)      ((LONG)(((WORD)(((DWORD_PTR)(a)) & 0xffff)) | ((DWORD)((WORD)(((DWORD_PTR)(b)) & 0xffff))) << 16))
+#define LOWORD(l)           ((WORD)(((DWORD_PTR)(l)) & 0xffff))
+#define HIWORD(l)           ((WORD)((((DWORD_PTR)(l)) >> 16) & 0xffff))
+
+void id_level_value()
+{
+    int id = 979;
+    int level = 1;
+
+    int value = MAKELONG(level, id);
+    std::cout << value << std::endl;
+    printf("id=%4x\n", id);
+    printf("level=%4x\n", level);
+    printf("value=%4x\n", value);
+
+    value  = 16187402;
+
+    int id1 = HIWORD(value);
+    int level1 = LOWORD(value);
+    std::cout << id1 << std::endl;
+    std::cout << level1 << std::endl;
+
+}
+
+std::string g_GetLocalTimeString(const time_t& t)
+{
+	struct tm* next_local_time = localtime(&t);
+	int year = next_local_time->tm_year + 1900;     // Year since 1900
+	int month = next_local_time->tm_mon + 1;        // Month (0-11)
+	int day = next_local_time->tm_mday;             // Day of the month (1-31)
+	int hour = next_local_time->tm_hour;            // Hours (0-23)
+	int minute = next_local_time->tm_min;           // Minutes (0-59)
+	int second = next_local_time->tm_sec;           // Seconds (0-59)
+
+	std::ostringstream str;
+	str << std::to_string(year) << ""
+    << std::to_string(month) << ""
+    << std::to_string(day) << ""
+    << std::to_string(hour) << ""
+    << std::to_string(minute) << ""
+    << std::to_string(second);
+
+    std::cout << str.str() << std::endl;
+
+    return str.str();
+}
+
+void fsb_MapToPoint(int x, int y)
+{
+    int map_x = x / 32;
+    int map_y = y / 32;
+
+    int map_x1 = map_x / 8;
+    int map_y1 = map_y / 16;
+
+    std::cout << "(" << x << "," << y << ")" << std::endl;
+    std::cout << "(" << map_x << "," << map_y << ")" << std::endl;
+    std::cout << "(" << map_x1 << "," << map_y1 << ")" << std::endl;
+
+
+
+
+
+}
