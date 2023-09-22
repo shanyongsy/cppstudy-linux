@@ -11,6 +11,8 @@
 
 bool is_str_gbk(const char* str)
 {
+    return true;
+
     unsigned int nBytes = 0;//GBK可用1-2个字节编码,中文两个 ,英文一个
     unsigned char chr = *str;
     bool bAllAscii = true; //如果全部都是ASCII,

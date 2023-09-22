@@ -24,7 +24,30 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	rename_all_file();
+	// test ostringstream
+	{
+		std::ostringstream os;
+		os << "hello" << "world" << "!";
+		std::cout << os.str() << std::endl;
+
+		os.str("");
+		if( os.str().size() == 0)
+		{
+			std::cout << "os.str().size() == 0" << std::endl;
+		}
+		else
+		{
+			std::cout << "os.str().size() != 0" << std::endl;
+
+		}
+		std::cout << os.str() << std::endl;
+	}
+	
+
+
+	//test_sum();
+
+	// rename_all_file();
 
 	// example : signal
 	//example_signal_handler_register();
@@ -237,9 +260,9 @@ int main(int argc, char *argv[])
 	// std::string strInfo2 = "hello";
 	// std::cout << strInfo2 << std::endl;
 
-	// // example : 智能指针
-	// std::shared_ptr<info> sp;
-	// info* p = NULL;
+	// example : 智能指针
+	// std::shared_ptr<Info> sp;
+	// Info* p = NULL;
 	// sp.reset(p);
 	// if(sp == NULL)
 	// {
@@ -249,7 +272,7 @@ int main(int argc, char *argv[])
 	// {
 	// 	std::cout << "sp is valid" << std::endl;
 	// }
-	// p = new info(1);
+	// p = new Info(1, "1");
 	// sp.reset(p);
 	// if(sp == NULL)
 	// {
@@ -259,17 +282,17 @@ int main(int argc, char *argv[])
 	// {
 	// 	std::cout << "sp is valid" << std::endl;
 	// }
-	// auto *pList = new std::list<std::shared_ptr<info>>();
+	// auto *pList = new std::list<std::shared_ptr<Info>>();
 	// pList->push_back(sp);
 	// std::cout << pList->size() << std::endl;
-	// std::shared_ptr<info> sp2(new info(2));
+	// std::shared_ptr<Info> sp2(new Info(2, "2"));
 	// pList->push_back(sp2);
 	// std::cout << pList->size() << std::endl;
 	// pList->pop_front();
 	// std::cout << pList->size() << std::endl;
 	// for(int i = 0; i < 10; i++)
 	// {
-	// 	std::shared_ptr<info> _sp(new info(i + 11));
+	// 	std::shared_ptr<Info> _sp(new Info(i + 11, std::to_string(i + 11)));
 	// 	pList->push_back(_sp);
 	// }
 	// while (!pList->empty())

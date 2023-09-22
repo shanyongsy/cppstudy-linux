@@ -4,6 +4,8 @@
 #include <sstream>
 #include <vector>
 #include <cassert>
+#include <cstdarg>
+
 
 #include "func.h"
 #include "struct_def.h"
@@ -413,4 +415,31 @@ void fsb_MapToPoint(int x, int y)
 
 
 
+}
+
+
+
+int sum(int count, ...) {
+    int total = 0;
+    
+    va_list args;
+    va_start(args, count);
+    
+    for (int i = 0; i < count; i++) {
+        int num = va_arg(args, int);
+        total += num;
+    }
+    
+    va_end(args);
+    
+    return total;
+}
+
+int test_sum() {
+    int result = sum(4, 10, 20, 30, 40);
+    std::cout << "Sum: " << result << std::endl;
+    std::cout << __FUNCTION__ << std::endl;
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    
+    return 0;
 }

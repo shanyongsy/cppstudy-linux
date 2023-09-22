@@ -11,11 +11,22 @@ private:
     const std::string name;
 
 public:
-    Info(int _id, const std::string &_name) : id(_id), name(_name) {}
-    ~Info() { std::cout << "~Info(), id is " << this->id << std::endl; };
+    Info(int _id, const std::string &_name) : id(_id), name(_name) {
+        std::cout << __FUNCTION__ << std::endl;
+        std::cout << __PRETTY_FUNCTION__ << std::endl;
+    }
+    ~Info() { 
+        std::cout << __FUNCTION__ << std::endl;
+        std::cout << __PRETTY_FUNCTION__ << std::endl;  
+        std::cout << "id is " << this->id << std::endl; 
+        };
 
 public:
-    int GetID() const { return id; }
+    int GetID() const { 
+        std::cout << __FUNCTION__ << std::endl;
+        std::cout << __PRETTY_FUNCTION__ << std::endl;  
+        return id; 
+        }
     const std::string &GetName() const { return name; }
 };
 
