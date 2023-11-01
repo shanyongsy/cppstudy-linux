@@ -5,12 +5,109 @@
 #include <vector>
 #include <cassert>
 #include <cstdarg>
-
+#include <chrono>
+#include <iostream>
+#include <thread>
+#include <map>
 
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
 
+void example_func_name()
+{
+    std::string str = __func__;
+    std::cout << str << std::endl;
+
+    std::string str1 = __FUNCTION__;
+    std::cout << str1 << std::endl;
+
+    std::string str2 = __PRETTY_FUNCTION__;
+    std::cout << str2 << std::endl;
+}
+
+void example_map()
+{
+    std::map<int, int*> myMap;
+    
+    int value1 = 42;
+    int value2 = 123;
+
+    myMap[1] = &value1;
+    myMap[2] = &value2;
+
+    auto it = myMap.find(1);
+
+    if (it != myMap.end()) {
+        // 删除 it 指向的元素
+        myMap.erase(it);
+
+        // it->second 仍然有效，指向原始的 value1 指针
+        std::cout << *(it->second) << std::endl;
+    }
+}
+
+void example_frame()
+{
+    int frameCount = 0;
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    // 模拟一些帧的处理，此处可替换为实际的游戏逻辑
+    for (int i = 0; i < 1000; ++i) {
+        // 处理帧的逻辑
+
+        // 帧计数增加
+        frameCount++;
+
+        // 在此处模拟帧处理的时间间隔，可以根据实际需要调整
+        std::this_thread::sleep_for(std::chrono::milliseconds(16)); // 模拟每帧16毫秒
+    }
+
+    auto endTime = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = endTime - startTime;
+
+    // 计算帧率
+    auto count = duration.count();
+    double fps = frameCount / count;
+
+    // 打印帧率
+    std::cout << "帧率: " << fps << " FPS" << std::endl;
+}
+
+void example_frame_2()
+{
+    const double samplingPeriod = 1.0;  // 采样周期为1秒
+    int frameCount = 0;
+    auto startTime = std::chrono::high_resolution_clock::now();
+    bool frameDelayed = false;
+
+    while (true) {
+        auto frameStartTime = std::chrono::high_resolution_clock::now();
+
+        // 模拟帧处理
+        // 这里可以是实际的游戏逻辑
+
+        auto frameEndTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> frameDuration = frameEndTime - frameStartTime;
+
+        if (frameDuration.count() > samplingPeriod) {
+            frameDelayed = true;
+        }
+
+        frameCount++;
+
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsedTime = currentTime - startTime;
+
+        if (elapsedTime.count() >= samplingPeriod) {
+            double fps = frameDelayed ? 0 : frameCount / samplingPeriod;
+            std::cout << "帧率: " << fps << " FPS" << std::endl;
+            startTime = currentTime;
+            frameCount = 0;
+            frameDelayed = false;
+        }
+    }
+}
 
 void example_weakptr(std::weak_ptr<PlayerInfo> p)
 {

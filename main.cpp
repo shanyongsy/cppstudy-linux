@@ -24,24 +24,111 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	// test ostringstream
+
+
+
+	// NPC_NORMAL_SYNC npc1;
+	// NPC_NORMAL_SYNC npc2 = npc1;
+	// //npc2.MapX++;
+	// if(npc1 != npc2)
+	// {
+	// 	std::cout << "npc1 != npc2" << std::endl;
+	// }
+	// else
+	// {
+	// 	std::cout << "npc1 == npc2" << std::endl;
+	// }
+
+	int m_nNpcSyncCounter = 0;
+	int m_nMaxCount = 10;
+	for(int i = 0; i < 100; i++)
 	{
-		std::ostringstream os;
-		os << "hello" << "world" << "!";
-		std::cout << os.str() << std::endl;
-
-		os.str("");
-		if( os.str().size() == 0)
-		{
-			std::cout << "os.str().size() == 0" << std::endl;
+		int nCounter = 0;
+		int nPoint = 0;
+		while (nPoint < m_nMaxCount)
+		{			
+			if((nCounter == m_nNpcSyncCounter /2) && (m_nNpcSyncCounter % 2 == 0))
+			{
+				std::cout << "yes";
+			}
+			else
+			{
+				std::cout << "no";
+			}
+			std::cout 
+				<< "\tnPoint=" << nPoint 
+				<< "\tnNpcSyncCounter=" << m_nNpcSyncCounter 
+				<< "\tvalue0=" << (m_nNpcSyncCounter /2)
+				<< "\tvalue1=" << (nCounter == m_nNpcSyncCounter /2)
+				<< "\tvalue2=" << (m_nNpcSyncCounter % 2)
+				<< std::endl;
+			nPoint++;
+			nCounter++;
 		}
-		else
+		m_nNpcSyncCounter++;
+		if(m_nNpcSyncCounter > m_nMaxCount *2)
 		{
-			std::cout << "os.str().size() != 0" << std::endl;
-
+			m_nNpcSyncCounter = 0;
 		}
-		std::cout << os.str() << std::endl;
 	}
+
+	// for(int i = 0; i < 10; i++)
+	// {
+	// 	if(i == 5)
+	// 		if( i < 6) 
+	// 			continue;
+	// 	std::cout << "1-" << i << std::endl;
+	// }
+
+	// PlayerInfo info("小明", 1000);
+	// for(int i = 0; i < 10; i++)
+	// info.PrintFuncName(std::to_string(i));
+
+	// example_func_name();
+
+	// example_frame();
+	// example_map();
+
+	// compare
+	// animal_att a1{1, 4};
+	// animal_att a2{1, 0};
+	// if( a1 != a2)
+	// {
+	// 	std::cout << "a1 != a2" << std::endl;
+	// }
+	// else
+	// {
+	// 	std::cout << "a1 == a2" << std::endl;
+	// }
+	// a1 = a2;
+	// if( a1 != a2)
+	// {
+	// 	std::cout << "a1 != a2" << std::endl;
+	// }
+	// else
+	// {
+	// 	std::cout << "a1 == a2" << std::endl;
+	// }
+
+
+	// test ostringstream
+	// {
+	// 	std::ostringstream os;
+	// 	os << "hello" << "world" << "!";
+	// 	std::cout << os.str() << std::endl;
+
+	// 	os.str("");
+	// 	if( os.str().size() == 0)
+	// 	{
+	// 		std::cout << "os.str().size() == 0" << std::endl;
+	// 	}
+	// 	else
+	// 	{
+	// 		std::cout << "os.str().size() != 0" << std::endl;
+
+	// 	}
+	// 	std::cout << os.str() << std::endl;
+	// }
 	
 
 

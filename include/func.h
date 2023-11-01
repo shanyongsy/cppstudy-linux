@@ -3,6 +3,14 @@
 #include <memory>
 #include "struct_def.h"
 
+void example_func_name();
+
+// example : map
+void example_map();
+
+// example : frame
+void example_frame();
+
 // example : weakptr
 void example_weakptr(std::weak_ptr<PlayerInfo> p);
 
