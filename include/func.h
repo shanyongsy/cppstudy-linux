@@ -46,3 +46,7 @@ std::string g_GetLocalTimeString(const time_t& t);
 void fsb_MapToPoint(int x, int y);
 
 int test_sum();
+
+void str_cmp_time();
+
+std::string generateRandomUUID();

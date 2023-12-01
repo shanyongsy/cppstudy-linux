@@ -10,9 +10,68 @@
 #include <thread>
 #include <map>
 
+#include <iostream>
+#include <random>
+
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
+
+void str_cmp_time()
+{
+const int numStrings = 5000;
+
+    // Generate 1w random UUIDs
+    std::map<std::string,std::string> uuids;
+
+    for (int i = 0; i < numStrings; ++i) {
+        uuids[generateRandomUUID()] = generateRandomUUID();
+        // uuids.push_back(generateRandomUUID());
+    }
+
+    // Pick a random string to compare against
+    std::string stringToCompare = generateRandomUUID();
+
+    // Measure the time for string comparison
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    for (const auto& uuid : uuids) {
+        if (uuid.second == stringToCompare) {
+            // Do something with the matching string (optional)
+        }
+    }
+
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
+
+    std::cout << "Time taken for comparison: " << duration.count() << " microseconds" << std::endl;
+
+
+    std::string str1 = " he llo  ";
+    str1.erase(0, str1.find_first_not_of(" "));
+
+    std::cout << "|" << str1 << "|" << std::endl;
+
+
+}
+
+std::string generateRandomUUID() {
+    static const char hexChars[] = "0123456789ABCDEF";
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, 15);
+
+    std::string uuid = "D4ED8B20-486A-3C8F-16EC-";
+    for (int i = 0; i < 12; ++i) {
+        if (i == 8 || i == 13) {
+            uuid += '-';
+        } else {
+            uuid += hexChars[dis(gen)];
+        }
+    }
+
+    return uuid;
+}
 
 void example_func_name()
 {

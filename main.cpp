@@ -24,6 +24,7 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
+	str_cmp_time();
 
 
 
@@ -39,38 +40,38 @@ int main(int argc, char *argv[])
 	// 	std::cout << "npc1 == npc2" << std::endl;
 	// }
 
-	int m_nNpcSyncCounter = 0;
-	int m_nMaxCount = 10;
-	for(int i = 0; i < 100; i++)
-	{
-		int nCounter = 0;
-		int nPoint = 0;
-		while (nPoint < m_nMaxCount)
-		{			
-			if((nCounter == m_nNpcSyncCounter /2) && (m_nNpcSyncCounter % 2 == 0))
-			{
-				std::cout << "yes";
-			}
-			else
-			{
-				std::cout << "no";
-			}
-			std::cout 
-				<< "\tnPoint=" << nPoint 
-				<< "\tnNpcSyncCounter=" << m_nNpcSyncCounter 
-				<< "\tvalue0=" << (m_nNpcSyncCounter /2)
-				<< "\tvalue1=" << (nCounter == m_nNpcSyncCounter /2)
-				<< "\tvalue2=" << (m_nNpcSyncCounter % 2)
-				<< std::endl;
-			nPoint++;
-			nCounter++;
-		}
-		m_nNpcSyncCounter++;
-		if(m_nNpcSyncCounter > m_nMaxCount *2)
-		{
-			m_nNpcSyncCounter = 0;
-		}
-	}
+	// int m_nNpcSyncCounter = 0;
+	// int m_nMaxCount = 10;
+	// for(int i = 0; i < 100; i++)
+	// {
+	// 	int nCounter = 0;
+	// 	int nPoint = 0;
+	// 	while (nPoint < m_nMaxCount)
+	// 	{			
+	// 		if((nCounter == m_nNpcSyncCounter /2) && (m_nNpcSyncCounter % 2 == 0))
+	// 		{
+	// 			std::cout << "yes";
+	// 		}
+	// 		else
+	// 		{
+	// 			std::cout << "no";
+	// 		}
+	// 		std::cout 
+	// 			<< "\tnPoint=" << nPoint 
+	// 			<< "\tnNpcSyncCounter=" << m_nNpcSyncCounter 
+	// 			<< "\tvalue0=" << (m_nNpcSyncCounter /2)
+	// 			<< "\tvalue1=" << (nCounter == m_nNpcSyncCounter /2)
+	// 			<< "\tvalue2=" << (m_nNpcSyncCounter % 2)
+	// 			<< std::endl;
+	// 		nPoint++;
+	// 		nCounter++;
+	// 	}
+	// 	m_nNpcSyncCounter++;
+	// 	if(m_nNpcSyncCounter > m_nMaxCount *2)
+	// 	{
+	// 		m_nNpcSyncCounter = 0;
+	// 	}
+	// }
 
 	// for(int i = 0; i < 10; i++)
 	// {
