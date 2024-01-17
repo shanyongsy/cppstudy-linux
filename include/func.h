@@ -50,3 +50,9 @@ int test_sum();
 void str_cmp_time();
 
 std::string generateRandomUUID();
+
+void make_mac();
+
+void find_str();
+
+int32_t getDiffDay(std::string dateStr);

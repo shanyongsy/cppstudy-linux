@@ -13,9 +13,111 @@
 #include <iostream>
 #include <random>
 
+#include <ctime>
+#include <iomanip>
+
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
+
+bool isValidDateString(const std::string& dateStr) {
+    std::tm tm = {0};
+    return std::sscanf(dateStr.c_str(), "%4d%2d%2d", &tm.tm_year, &tm.tm_mon, &tm.tm_mday) == 3;
+}
+
+// return : 1 今天
+//          <= 0 过去
+int32_t getDiffDay(std::string dateStr)
+{
+    // 检查日期字符串的有效性
+    if (!isValidDateString(dateStr)) {
+        // std::cerr << "无效的日期字符串格式" << std::endl;
+        return -1000;
+    }
+
+    // 获取当前日期的零点
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+    struct std::tm* timeinfo = std::localtime(&now_time);
+    timeinfo->tm_hour = 0;
+    timeinfo->tm_min = 0;
+    timeinfo->tm_sec = 0;
+    auto todayStart = std::chrono::system_clock::from_time_t(std::mktime(timeinfo));
+
+    // 从字符串解析目标日期
+    int year, month, day;
+    std::sscanf(dateStr.c_str(), "%4d%2d%2d", &year, &month, &day);
+
+    // 设置目标日期
+    std::tm targetDate = {0};
+    targetDate.tm_year = year - 1900;
+    targetDate.tm_mon = month - 1;
+    targetDate.tm_mday = day;
+
+    // 计算天数差异
+    auto targetPoint = std::chrono::system_clock::from_time_t(std::mktime(&targetDate));
+    std::chrono::system_clock::duration daysDifference = targetPoint - todayStart;
+
+    // 输出结果
+    int32_t ret =  std::chrono::duration_cast<std::chrono::hours>(daysDifference).count() / 24 ;
+    ret++;
+    return ret;
+}
+
+void find_str()
+{
+    std::string strInfo = "Hello<c=y>World";
+
+    // 查找子字符串
+    size_t found = strInfo.find("<c=y>");
+
+    std::cout << found << std::endl;
+
+    // 检查是否找到
+    if (found != std::string::npos) {
+        std::cout << "字符串包含子字符串 \"<c=y>\"" << std::endl;
+    } else {
+        std::cout << "字符串不包含子字符串 \"<c=y>\"" << std::endl;
+    }
+}
+
+void make_mac()
+{
+    char m_szLoginMAC[6];
+    m_szLoginMAC[0] = 0xaa;
+    m_szLoginMAC[1] = 0xbb;
+    m_szLoginMAC[2] = 0xcc;
+    m_szLoginMAC[3] = 0xdd;
+    m_szLoginMAC[4] = 0xaa;
+    m_szLoginMAC[5] = 0xb1;
+
+    {
+        std::string mac = "";
+        for (int i = 0; i < 6; i++)
+        {
+            char szTemp[10] = {0};
+            sprintf(szTemp, "%02X", static_cast<unsigned char>(m_szLoginMAC[i]));
+            mac += szTemp;
+        }
+        
+            std::cout << mac << std::endl;
+    }
+
+    {
+        std::string    mac = "";
+        char szTemp[32] = {0};
+        sprintf(szTemp, "%02x%02x%02x%02x%02x%02x",  
+        static_cast<unsigned char>(m_szLoginMAC[0]), 
+        static_cast<unsigned char>(m_szLoginMAC[1]), 
+        static_cast<unsigned char>(m_szLoginMAC[2]), 
+        static_cast<unsigned char>(m_szLoginMAC[3]), 
+        static_cast<unsigned char>(m_szLoginMAC[4]), 
+        static_cast<unsigned char>(m_szLoginMAC[5]));
+        mac = szTemp;
+
+        std::cout << mac << std::endl;
+    }
+}
 
 void str_cmp_time()
 {
