@@ -20,6 +20,37 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+void test_shop()
+{
+    const int price_4 = 4;
+    const int price_3 = 3;
+    const int price_2 = 2;
+    const int price_1 = 1;
+    const int price_total = 10;
+
+    std::cout << "1元" << "\t" << "2元" << "\t" << "3元" << "\t" << "4元" << std::endl;
+    std::cout << "----------------------------------------------------" << std::endl;
+
+    for(int i_1 = 0; i_1 <= 10; i_1++)
+    {
+        for(int i_2 = 0; i_2 <= 10; i_2++)
+        {
+            for(int i_3 = 0; i_3 <= 10; i_3++)
+            {
+                for(int i_4 = 0; i_4 <= 10; i_4++)
+                {
+                    int count = i_1 + i_2 + i_3 + i_4;
+                    int price = i_1 * price_1 + i_2 * price_2 + i_3 * price_3 + i_4 * price_4;
+                    if(count == 4 && price == 10)
+                    {
+                        std::cout << i_1 << "\t" << i_2 << "\t" << i_3 << "\t" << i_4 << std::endl;
+                    }
+                }
+            }
+        }
+    }
+}
+
 bool isValidDateString(const std::string& dateStr) {
     std::tm tm = {0};
     return std::sscanf(dateStr.c_str(), "%4d%2d%2d", &tm.tm_year, &tm.tm_mon, &tm.tm_mday) == 3;
