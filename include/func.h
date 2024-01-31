@@ -56,3 +56,5 @@ void make_mac();
 void find_str();
 
 int32_t getDiffDay(std::string dateStr);
+
+void test_loop(int loop_count, int data_length);

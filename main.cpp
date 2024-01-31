@@ -24,29 +24,36 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	std::string str = "hello";
-
-	str = "20240116";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
-
-	str = "20240117";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
-
-	str = "20240118";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
-
-	str = "20240119";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
-
-	str = "202402190";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+	for(int i  = 0; i < 100; i++)
+	{
+		test_loop(i, 10);
+	}
 
 
-	str = "ab";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
 
-	str = "中国";
-	std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+	// std::string str = "hello";
+
+	// str = "20240116";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "20240117";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "20240118";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "20240119";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "202402190";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+
+	// str = "ab";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "中国";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
 
 
 

@@ -20,6 +20,35 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+
+void test_loop(int loop_count, int data_length)
+{
+    // std::cout << "loop_count = " << loop_count << std::endl;
+    // std::cout << "data_length = " << data_length << std::endl;
+
+    static int32_t m_nNpcSyncCounter = 0;
+    int	nCounter = 0;
+    int nNpcCurSyncIdx = m_nNpcSyncCounter / 3;
+	int nNpcModResult = m_nNpcSyncCounter % 3;
+
+    int32_t nNodeIndex = 0;
+    while (nNodeIndex < data_length)
+    {
+        if ( nNpcModResult == 0 && nNpcCurSyncIdx == nCounter )
+		{
+            std::cout << "loop=" << loop_count << ",index=" << nNodeIndex << ",counter=" << nCounter << std::endl;
+		}
+        nCounter++;
+        nNodeIndex++;
+    }
+	m_nNpcSyncCounter++;
+	if (m_nNpcSyncCounter > data_length * 3)
+	{
+		m_nNpcSyncCounter = 0;
+	}
+	nCounter = 0;
+}
+
 bool isValidDateString(const std::string& dateStr) {
     std::tm tm = {0};
     return std::sscanf(dateStr.c_str(), "%4d%2d%2d", &tm.tm_year, &tm.tm_mon, &tm.tm_mday) == 3;
