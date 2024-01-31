@@ -49,6 +49,26 @@ int main(int argc, char *argv[])
 	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
 
 
+	// test_shop();
+
+	// std::string str = "hello";
+
+	// str = "20240116";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "20240117";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "20240118";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "20240119";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+	// str = "202402190";
+	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
+
+
 	// str = "ab";
 	// std::cout << str << " is " << getDiffDay(str) << " days from now" << std::endl;
 
