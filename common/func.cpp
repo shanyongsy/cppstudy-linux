@@ -748,6 +748,8 @@ int sum(int count, ...) {
     }
     
     va_end(args);
+
+    int b= 0;
     
     return total;
 }
