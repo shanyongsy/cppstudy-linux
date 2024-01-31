@@ -729,7 +729,7 @@ void fsb_MapToPoint(int x, int y)
     std::cout << "(" << map_x1 << "," << map_y1 << ")" << std::endl;
 
 
-
+int c=0;
 
 
 }
