@@ -28,15 +28,15 @@ void test_loop(int loop_count, int data_length)
 
     static int32_t m_nNpcSyncCounter = 0;
     int	nCounter = 0;
-    int nNpcCurSyncIdx = m_nNpcSyncCounter / 3;
-	int nNpcModResult = m_nNpcSyncCounter % 3;
+    int nNpcCurSyncIdx = m_nNpcSyncCounter / 2;
+	int nNpcModResult = m_nNpcSyncCounter & 1;
 
     int32_t nNodeIndex = 0;
     while (nNodeIndex < data_length)
     {
         if ( nNpcModResult == 0 && nNpcCurSyncIdx == nCounter )
 		{
-            std::cout << "loop=" << loop_count << ",index=" << nNodeIndex << ",counter=" << nCounter << std::endl;
+            std::cout << "loop=" << loop_count << ",index=" << nNodeIndex << ",counter=" << nCounter << ",nNpcSyncCounter=" << m_nNpcSyncCounter << std::endl;
 		}
         nCounter++;
         nNodeIndex++;
