@@ -24,12 +24,12 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	for(int i  = 0; i < 100; i++)
-	{
-		test_loop(i, 10);
-	}
+	test_list();
 
-
+	// for(int i  = 0; i < 100; i++)
+	// {
+	// 	test_loop(i, 10);
+	// }
 
 	// std::string str = "hello";
 

@@ -8,7 +8,9 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
+#include <algorithm>
 #include <map>
+#include <list>
 
 #include <iostream>
 #include <random>
@@ -19,6 +21,69 @@
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
+
+void test_list()
+{
+    std::list<int32_t> lsValue;
+
+    for (int i = 0; i < 10; i++)
+    {
+        lsValue.push_back(i);
+    }
+
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     lsValue.push_back(i);
+    // }
+
+    std::list<int32_t> lsHave;
+
+
+    for (int32_t& nValue : lsValue)
+	{
+        // lsHave 中存在就不打印了
+        // if(std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
+        // {
+        //     continue;
+        // }
+
+
+        // if (std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
+        // {
+        //     continue;
+        // }
+
+        // if(nValue == 5)
+        // {
+        //     it = lsValue.erase(it);
+        // }
+
+        lsHave.push_back(nValue);
+        std::cout << nValue << std::endl;
+	}
+
+    lsValue.clear();
+    std::cout << "----------------------, count=" << std::to_string(lsValue.size()) << std::endl;
+
+    // for (std::list<int32_t>::reverse_iterator it = lsValue.rbegin(); it != lsValue.rend(); ++it)
+	// {
+    //     int32_t nValue = *it;
+    //     // lsHave 中存在就不打印了
+    //     // if(std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
+    //     // {
+    //     //     continue;
+    //     // }
+
+
+    //     // if (std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
+    //     // {
+    //     //     continue;
+    //     // }
+
+    //     lsHave.push_back(nValue);
+    //     std::cout << nValue << std::endl;
+	// }
+}
 
 
 void test_loop(int loop_count, int data_length)
