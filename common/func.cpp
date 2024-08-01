@@ -22,69 +22,179 @@
 #include "struct_def.h"
 #include "md5c.h"
 
-void test_list()
+struct STATE_EFFECT_SYNC
 {
-    std::list<int32_t> lsValue;
+    int32_t nEffectID;
+    int32_t nEffectLevel;
+    int32_t nForce;
+    int32_t nEffectTime;
+};
 
-    for (int i = 0; i < 10; i++)
+void test_clear_vector()
+{
+    STATE_EFFECT_SYNC info[10];
+    for(int i = 0; i < 10; i++)
     {
-        lsValue.push_back(i);
+        info[i].nEffectID = i;
+        info[i].nEffectLevel = 1;
+        info[i].nForce = 1;
+        info[i].nEffectTime = 1;
+    }
+    std::cout << "size=" << sizeof(STATE_EFFECT_SYNC) << std::endl;
+    std::cout << "size=" << sizeof(info) << std::endl;
+    memset(info, 0, sizeof(info));
+    for(int i = 0; i < 10; i++)
+    {
+        std::cout << "id=" << info[i].nEffectID << std::endl;
     }
 
-    // for (int i = 0; i < 10; i++)
+
     // {
-    //     lsValue.push_back(i);
+    //     int32_t nValue = 7;
+    //     // 求与 4 的商
+    //     int32_t nDivResult = nValue / 4;
+    //     // 求与 4 的余数
+    //     int32_t nModResult = nValue % 4;
+    //     std::cout << "nDivResult=" << nDivResult << std::endl;
+    //     std::cout << "nModResult=" << nModResult << std::endl;
     // }
 
-    std::list<int32_t> lsHave;
 
 
-    for (int32_t& nValue : lsValue)
-	{
-        // lsHave 中存在就不打印了
-        // if(std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
-        // {
-        //     continue;
-        // }
-
-
-        // if (std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
-        // {
-        //     continue;
-        // }
-
-        // if(nValue == 5)
-        // {
-        //     it = lsValue.erase(it);
-        // }
-
-        lsHave.push_back(nValue);
-        std::cout << nValue << std::endl;
-	}
-
-    lsValue.clear();
-    std::cout << "----------------------, count=" << std::to_string(lsValue.size()) << std::endl;
-
-    // for (std::list<int32_t>::reverse_iterator it = lsValue.rbegin(); it != lsValue.rend(); ++it)
-	// {
-    //     int32_t nValue = *it;
-    //     // lsHave 中存在就不打印了
-    //     // if(std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
-    //     // {
-    //     //     continue;
-    //     // }
-
-
-    //     // if (std::find(lsHave.begin(), lsHave.end(), nValue) != lsHave.end())
-    //     // {
-    //     //     continue;
-    //     // }
-
-    //     lsHave.push_back(nValue);
-    //     std::cout << nValue << std::endl;
-	// }
 }
 
+ std::list<STATE_EFFECT_SYNC> lsValue;
+
+void AddEffect(STATE_EFFECT_SYNC &sync)
+{
+    if(sync.nForce > 0)
+	{// 删除所有相同  skill id 的信息				
+		for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end();)
+		{
+			if (it->nEffectID == sync.nEffectID)
+			{
+                std::cout << "erase " << "id=" << it->nEffectID << std::endl;
+				it = lsValue.erase(it);
+			}
+            else
+            {
+                ++it;
+            }
+		}
+	}
+	else
+	{// 查询最后一个相同 skill id 的数据信息
+		std::list<STATE_EFFECT_SYNC>::iterator lastIt = lsValue.end();
+		for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+		{
+			if(it->nEffectID == sync.nEffectID)
+			{
+				lastIt = it;
+			}
+		}
+
+		if(lastIt != lsValue.end())
+		{
+			if(lastIt->nForce <= 0 )
+			{
+				if(lastIt->nEffectLevel <= sync.nEffectLevel)
+				{
+                    std::cout << "erase " << "id=" << lastIt->nEffectID << std::endl;
+					lsValue.erase(lastIt);
+				}
+				else
+				{
+                    std::cout << "pass " << "id=" << sync.nEffectID << std::endl;
+					return;
+				}
+			}
+		}
+	}	
+
+	lsValue.push_back(sync);
+}
+
+void test_list()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        STATE_EFFECT_SYNC info;
+        info.nEffectID = i;
+        info.nEffectLevel = 3;
+        info.nForce = 1;
+        AddEffect(info);
+    }    
+
+    STATE_EFFECT_SYNC info;
+    info.nEffectID = 5;
+    info.nEffectLevel = 4;
+    info.nForce = 1;
+    AddEffect(info);    
+    // 轮询打印
+    for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+    {
+        std::cout << "id=" << it->nEffectID << ",level=" << it->nEffectLevel << ",force=" << it->nForce << std::endl;
+    }
+    std::cout <<  "-------------------" << std::endl;
+
+    info.nEffectID = 5;
+    info.nEffectLevel = 5;
+    info.nForce = 0;
+    AddEffect(info);    
+    // 轮询打印
+    for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+    {
+        std::cout << "id=" << it->nEffectID << ",level=" << it->nEffectLevel << ",force=" << it->nForce << std::endl;
+    }
+    std::cout <<  "-------------------" << std::endl;
+
+    info.nEffectID = 5;
+    info.nEffectLevel = 1;
+    info.nForce = 0;
+    AddEffect(info);    
+    // 轮询打印
+    for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+    {
+        std::cout << "id=" << it->nEffectID << ",level=" << it->nEffectLevel << ",force=" << it->nForce << std::endl;
+    }
+    std::cout <<  "-------------------" << std::endl;
+
+    info.nEffectID = 5;
+    info.nEffectLevel = 6;
+    info.nForce = 0;
+    AddEffect(info);    
+    // 轮询打印
+    for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+    {
+        std::cout << "id=" << it->nEffectID << ",level=" << it->nEffectLevel << ",force=" << it->nForce << std::endl;
+    }
+    std::cout <<  "-------------------" << std::endl;
+
+    info.nEffectID = 5;
+    info.nEffectLevel = 2;
+    info.nForce = 1;
+    AddEffect(info);    
+    // 轮询打印
+    for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+    {
+        std::cout << "id=" << it->nEffectID << ",level=" << it->nEffectLevel << ",force=" << it->nForce << std::endl;
+    }
+    std::cout <<  "-------------------" << std::endl;
+
+    info.nEffectID = 1;
+    info.nEffectLevel = 2;
+    info.nForce = 0;
+    AddEffect(info);    
+    // 轮询打印
+    for (std::list<STATE_EFFECT_SYNC>::iterator it = lsValue.begin(); it != lsValue.end(); ++it)
+    {
+        std::cout << "id=" << it->nEffectID << ",level=" << it->nEffectLevel << ",force=" << it->nForce << std::endl;
+    }
+    std::cout <<  "-------------------" << std::endl;
+
+
+
+}
 
 void test_loop(int loop_count, int data_length)
 {

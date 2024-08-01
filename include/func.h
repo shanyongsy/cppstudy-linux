@@ -61,3 +61,5 @@ void test_loop(int loop_count, int data_length);
 void test_shop();
 
 void test_list();
+
+void test_clear_vector();
