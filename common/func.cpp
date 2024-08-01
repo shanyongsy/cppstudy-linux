@@ -22,6 +22,19 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+void test_func_sort()
+{
+    std::cout << "test_func_sort" << std::endl;
+
+    int value[3] = {3,1,2};
+    std::sort(value, value + 3);
+
+    for(int i = 0; i < 3; i++)
+    {
+        std::cout << value[i] << std::endl;
+    }
+}
+
 struct STATE_EFFECT_SYNC
 {
     int32_t nEffectID;

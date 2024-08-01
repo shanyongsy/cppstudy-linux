@@ -24,7 +24,9 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	test_clear_vector();
+	test_func_sort();
+
+	// test_clear_vector();
 
 
 	// test_list();

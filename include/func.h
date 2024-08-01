@@ -63,3 +63,5 @@ void test_shop();
 void test_list();
 
 void test_clear_vector();
+
+void test_func_sort();
