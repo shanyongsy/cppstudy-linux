@@ -65,3 +65,5 @@ void test_list();
 void test_clear_vector();
 
 void test_func_sort();
+
+void test_init_int();

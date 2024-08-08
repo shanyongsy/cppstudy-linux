@@ -22,6 +22,15 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+void test_init_int()
+{
+    int value[3] = {-1};
+    for(int i = 0; i < 3; i++)
+    {
+        std::cout << value[i] << std::endl;
+    }
+}
+
 void test_func_sort()
 {
     std::cout << "test_func_sort" << std::endl;
