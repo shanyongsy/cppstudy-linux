@@ -67,3 +67,10 @@ void test_clear_vector();
 void test_func_sort();
 
 void test_init_int();
+
+// 是否是同一天
+bool IsSameDay(time_t nTm1, time_t nTm2);
+// 获取指定时间戳的当天零时时间戳
+time_t GetZeroTm(time_t nTm);
+
+void TestTime();

@@ -22,6 +22,49 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+// 测试时间与 uint32_t 的转换，以及时间的同天判断
+void TestTime()
+{
+    time_t tNow = time(0);
+    uint32_t nNow = static_cast<uint32_t>(tNow);
+    time_t tUse = static_cast<time_t>(nNow);
+    tm* tmNow = localtime(&tUse);
+    std::cout << (tmNow->tm_year + 1900) << '-' << (tmNow->tm_mon + 1) << '-' << tmNow->tm_mday << ' ' << tmNow->tm_hour << ':' << tmNow->tm_min << ':' << tmNow->tm_sec << std::endl;
+
+    for(int i  = 0 ; i < 24 ; i++)
+    {
+        nNow += 60 * 60;
+        time_t tTemp = static_cast<time_t>(nNow);
+        tm* tmTemp = localtime(&tTemp);
+        std::cout << (tmTemp->tm_year + 1900) << '-' << (tmTemp->tm_mon + 1) << '-' << tmTemp->tm_mday << ' ' << tmTemp->tm_hour << ':' << tmTemp->tm_min << ':' << tmTemp->tm_sec << std::endl;
+
+        bool b = IsSameDay(tNow, tTemp);
+        std::string str = b ? "yes" : "no";
+        std::cout << "same day = " << str.c_str() << std::endl;
+    }
+}
+
+// 是否是同一天
+bool IsSameDay(time_t nTm1, time_t nTm2)
+{
+    tm tTime1;
+    tm tTime2;
+    localtime_r(&nTm1, &tTime1);
+    localtime_r(&nTm2, &tTime2);
+    return tTime1.tm_year == tTime2.tm_year && tTime1.tm_yday == tTime2.tm_yday;
+}
+
+// 获取指定时间戳的当天零时时间戳
+time_t GetZeroTm(time_t nTm)
+{
+    tm tTime;
+    localtime_r(&nTm, &tTime);
+    tTime.tm_hour = 0;
+    tTime.tm_min = 0;
+    tTime.tm_sec = 0;
+    return mktime(&tTime);
+}
+
 void test_init_int()
 {
     int value[3] = {-1};
