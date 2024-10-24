@@ -96,4 +96,11 @@ public:
     }
 };
 
+struct  SkillInfo
+{
+    int16_t id{0};
+    int32_t cd{0};
+};
+
+
 #endif // INFO_H

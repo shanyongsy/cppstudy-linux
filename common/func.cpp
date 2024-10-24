@@ -22,6 +22,37 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+void TestVector()
+{
+    std::vector<SkillInfo> vInfo;
+    for(int i = 0; i < 10; i++)
+    {
+        SkillInfo info;
+        info.id = i;
+        info.cd = i;
+        vInfo.push_back(info);
+    }
+    
+    int nCount = vInfo.size();
+    int nLen = sizeof(SkillInfo) * nCount;
+    char* pBuff = new char[nLen];
+    memset(pBuff, 0, nLen);
+    
+    SkillInfo* pInfo = (SkillInfo*)pBuff;
+    for(int i = 0; i < nCount; i++)
+    {
+        pInfo[i] = vInfo[i];
+    }
+    vInfo.clear();
+
+    for(int i = 0; i < nCount; i++)
+    {
+        std::cout << "id=" << pInfo[i].id << ",cd=" << pInfo[i].cd << std::endl;
+    }
+
+    delete[] pBuff;
+}
+
 // 测试时间与 uint32_t 的转换，以及时间的同天判断
 void TestTime()
 {

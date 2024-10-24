@@ -24,8 +24,10 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	TestTime();
+	TestVector();
 
+
+	// TestTime();
 
 	// test_init_int();
 

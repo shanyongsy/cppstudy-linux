@@ -74,3 +74,5 @@ bool IsSameDay(time_t nTm1, time_t nTm2);
 time_t GetZeroTm(time_t nTm);
 
 void TestTime();
+
+void TestVector();
