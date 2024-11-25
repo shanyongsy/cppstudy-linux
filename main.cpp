@@ -24,7 +24,9 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	TestVector();
+	TestVector2();
+
+	// TestVector();
 
 
 	// TestTime();

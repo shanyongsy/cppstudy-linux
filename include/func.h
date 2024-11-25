@@ -76,3 +76,6 @@ time_t GetZeroTm(time_t nTm);
 void TestTime();
 
 void TestVector();
+
+void TestVector2();
+

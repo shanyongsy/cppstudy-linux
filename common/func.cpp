@@ -22,6 +22,50 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+void TestVector2()
+{
+    // 定义节点结构
+    struct KMergeListNode {
+        std::string name = "";  // 显示名称
+        int id = 0;             // 原配方中的ID
+        int count = 0;          // 可合成数量
+        std::vector<int> vItems;  // 合成所需物品
+    };
+
+    std::vector<KMergeListNode> vNodes = {
+        {"NodeA", 3, 5, {1, 2, 3, 10, 20, 30}},
+        {"NodeB", 1, 10, {4, 5, 6}},
+        {"NodeC", 2, 5, {7, 8, 9}},
+        {"NodeD", 4, 10, {10, 11, 12}},
+        {"NodeE", 5, 3, {13, 14, 15}}
+    };
+
+    KMergeListNode node = vNodes[0];
+    std::cout 
+    << "Name: " << node.name 
+    << ", ID: " << node.id 
+    << ", Count: " << node.count 
+    << ", Items: " << node.vItems.size()
+    << '\n';
+
+    // 使用 lambda 表达式排序
+    std::sort(vNodes.begin(), vNodes.end(), [](const KMergeListNode& a, const KMergeListNode& b) {
+        if (a.count != b.count) {
+            return a.count > b.count;  // 优先按照 count 降序
+        }
+        return a.id < b.id;  // 然后按照 id 升序
+    });
+
+    // 输出结果
+    for (const auto& node : vNodes) {
+        std::cout << "Name: " << node.name << ", ID: " << node.id << ", Count: " << node.count << '\n';
+    }
+
+
+
+    
+}
+
 void TestVector()
 {
     std::vector<SkillInfo> vInfo;
