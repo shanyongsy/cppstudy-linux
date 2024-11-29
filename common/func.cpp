@@ -22,6 +22,60 @@
 #include "struct_def.h"
 #include "md5c.h"
 
+static uint32_t nRandomSeed = 0;
+
+uint64_t g_Random(uint64_t nMax)
+{
+	if (nMax)
+	{
+		nRandomSeed = nRandomSeed * 214013L + 2531011L;
+		return ((nRandomSeed >> 16) & 0x7fff) % nMax;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+void test_random()
+{
+    nRandomSeed = time(0);
+    for(int i = 0; i < 10; i++)
+    {
+        int nCount_70 = 0;
+        int nCount_80 = 0;
+        int nCount_90 = 0;
+
+        for(int j = 0; j < 10; j++)
+        {
+            int nRandomValue = g_Random(100);
+            if(nRandomValue < 70)
+            {
+                nCount_70++;
+            }
+            
+            if(nRandomValue < 80)
+            {
+                nCount_80++;
+            }
+            
+            if(nRandomValue < 90)
+            {
+                nCount_90++;
+            }
+            
+            std::cout << g_Random(100) << " ";
+        }
+
+        std::cout << std::endl;
+
+        std::cout << "70:" << std::to_string(nCount_70) 
+        << ",80:" << std::to_string(nCount_80)
+        << ",90:" << std::to_string(nCount_90) 
+        << std::endl << std::endl;
+    }
+}
+
 void TestVector2()
 {
     // 定义节点结构

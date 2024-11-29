@@ -79,3 +79,5 @@ void TestVector();
 
 void TestVector2();
 
+void test_random();
+
