@@ -11,16 +11,78 @@
 #include <algorithm>
 #include <map>
 #include <list>
-
 #include <iostream>
 #include <random>
-
 #include <ctime>
 #include <iomanip>
+#include <bitset>
+#include <string>
 
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
+
+void test_challenge_score()
+{
+    BHMJ_Challenge_Score score;
+
+    std::cout << "==============================" << std::endl;
+    score.setPlayerName(0, "abc");
+    score.setPlayerName(1, "");
+    score.setPlayerName(2, "中国");
+    score.printNames();
+    std::cout << "sort" << std::endl;
+    score.sortNames();
+    score.printNames();
+
+    std::cout << "==============================" << std::endl;
+    score.setPlayerName(0, "中国");
+    score.setPlayerName(1, "");
+    score.setPlayerName(2, "abc");
+    score.printNames();
+    std::cout << "sort" << std::endl;
+    score.sortNames();
+    score.printNames();
+
+}
+
+
+void test_uint_to_int()
+{
+    int32_t nValue = 0;
+
+    // 表头
+    std::cout << std::left
+              << std::setw(6)  << "i"
+              << std::setw(14) << "1<<(i-1)"
+              << std::setw(40) << "1<<(i-1)(bin)"
+              << std::setw(14) << "total"
+              << std::setw(40) << "total(bin)"
+              << std::endl;
+
+    for (int32_t i = 1; i < 32; i++)
+    {
+        int32_t nTemp = 1 << (i - 1);
+        nValue += nTemp;
+
+        std::cout << std::left
+                  << std::setw(6)  << i
+                  << std::setw(14) << nTemp
+                  << std::setw(40) << std::bitset<32>(nTemp)
+                  << std::setw(14) << nValue
+                  << std::setw(40) << std::bitset<32>(nValue)
+                  << std::endl;
+    }
+
+    int32_t nOldValue = nValue;
+    uint32_t nUValue = nValue;
+    nValue = nUValue;
+
+    std::cout << "\nFinal Results:\n";
+    std::cout << "nOldValue: " << nOldValue << " (" << std::bitset<32>(nOldValue) << ")\n";
+    std::cout << "nUValue:   " << nUValue   << " (" << std::bitset<32>(nUValue) << ")\n";
+    std::cout << "nValue:    " << nValue    << " (" << std::bitset<32>(nValue) << ")\n";
+}
 
 static uint32_t nRandomSeed = 0;
 

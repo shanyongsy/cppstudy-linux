@@ -3,6 +3,10 @@
 
 #include <string>
 #include <iostream>
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <string>
 
 class Info
 {
@@ -102,5 +106,76 @@ struct  SkillInfo
     int32_t cd{0};
 };
 
+struct BHMJ_Challenge_Score
+{
+    char m_PlayerName[3][32];
+    uint16_t m_nUseTime;    // 用时
+    uint64_t m_nTimestamp;  // 记录的时间戳
+    uint16_t m_nSeason;     // 赛季ID
+    uint8_t m_nTurn;        // 轮次
+    uint8_t m_nLayer;       // 层次
+
+    BHMJ_Challenge_Score() {
+        std::memset(m_PlayerName, 0, sizeof(m_PlayerName));
+        m_nUseTime = 0;
+        m_nTimestamp = 0;
+        m_nSeason = 0;
+        m_nTurn = 0;
+        m_nLayer = 0;
+    }
+
+    // 排序函数：按字典序升序
+    void sortNames() {
+        // 1. 临时拷贝到 std::array
+        std::array<std::array<char, 32>, 3> temp;
+        for (int i = 0; i < 3; ++i) {
+            std::memcpy(temp[i].data(), m_PlayerName[i], 32);
+        }
+
+        // 2. 排序
+        std::sort(temp.begin(), temp.end(),
+            [](const auto& a, const auto& b) {
+                return std::strcmp(a.data(), b.data()) < 0;
+            });
+
+        // 3. 写回到 m_PlayerName
+        for (int i = 0; i < 3; ++i) {
+            std::memcpy(m_PlayerName[i], temp[i].data(), 32);
+        }
+    }
+
+    void printNames() const {
+        int nIndex = 0;
+        for (const auto &name : m_PlayerName) {
+            if (name[0] != '\0')
+                std::cout << std::to_string(nIndex) << ":" << name << std::endl;
+            else
+                std::cout << std::to_string(nIndex) << ":" << std::endl;
+
+            nIndex++;
+        }
+    }
+
+    // 覆盖某个玩家名字
+    void setPlayerName(int index, const char* name) {
+        if (index < 0 || index >= 3) {
+            std::cerr << "Index out of range: " << index << "\n";
+            return;
+        }
+        // 先清空该槽位
+        std::memset(m_PlayerName[index], 0, sizeof(m_PlayerName[index]));
+        // 拷贝字符串，最多拷贝 31 个字符，保证末尾是 '\0'
+        std::strncpy(m_PlayerName[index], name, sizeof(m_PlayerName[index]) - 1);
+    }
+
+    std::string getKey() const {
+        std::string key;
+        for (size_t i = 0; i < 3; ++i) {
+            key += std::string(m_PlayerName[i]);
+            if (i < 2) key += "_"; // 在名字之间加入下划线
+        }
+        return key;
+    }
+};
 
 #endif // INFO_H

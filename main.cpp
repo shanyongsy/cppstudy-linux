@@ -24,7 +24,11 @@ typedef unsigned long DWORD;
 
 int main(int argc, char *argv[])
 {
-	test_random();
+	test_challenge_score();
+
+	// test_uint_to_int();
+
+	// test_random();
 
 	// TestVector2();
 
