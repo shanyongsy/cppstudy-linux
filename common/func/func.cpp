@@ -17,33 +17,83 @@
 #include <iomanip>
 #include <bitset>
 #include <string>
+#include <unordered_map>
 
 #include "func.h"
 #include "struct_def.h"
 #include "md5c.h"
 
+void test_vec()
+{
+    int nCount = 10;
+    int values[nCount];
+    int i = 0;
+    for(i = 0; i < nCount; i++)
+    {
+        values[i] = i;
+    }
+
+    std::cout << "i=" << std::to_string(i) << std::endl;
+}
+
 void test_challenge_score()
 {
-    BHMJ_Challenge_Score score;
+    // BHMJ_Challenge_Score score_1;
 
-    std::cout << "==============================" << std::endl;
-    score.setPlayerName(0, "abc");
-    score.setPlayerName(1, "");
-    score.setPlayerName(2, "中国");
-    score.printNames();
-    std::cout << "sort" << std::endl;
-    score.sortNames();
-    score.printNames();
+    // std::cout << "==============================" << std::endl;
+    // score_1.setPlayerName(0, "abc");
+    // score_1.setPlayerName(1, "");
+    // score_1.setPlayerName(2, "中国");
+    // score_1.printNames();
+    // std::cout << "sort" << std::endl;
+    // score.sortNames();
+    // score.printNames();
 
-    std::cout << "==============================" << std::endl;
-    score.setPlayerName(0, "中国");
-    score.setPlayerName(1, "");
-    score.setPlayerName(2, "abc");
-    score.printNames();
-    std::cout << "sort" << std::endl;
-    score.sortNames();
-    score.printNames();
+    // std::cout << "==============================" << std::endl;
+    // BHMJ_Challenge_Score score_2;
+    // score_2 = score_1;
+    // score_2.printNames();
+    // score_2.setPlayerName(1, "人民");
+    // score_1.printNames();
+    // score_2.printNames();
 
+    // std::cout << "==============================" << std::endl;
+    // score.setPlayerName(0, "中国");
+    // score.setPlayerName(1, "");
+    // score.setPlayerName(2, "abc");
+    // score.printNames();
+    // std::cout << "sort" << std::endl;
+    // score.sortNames();
+    // score.printNames();
+
+    std::unordered_map<std::string, BHMJ_Challenge_Score> mapInfo;
+    for(int i = 0; i < 10; i++)
+    {
+        BHMJ_Challenge_Score score;
+        score.setPlayerName(0, std::to_string(i).c_str());
+        int nValue = i % 3;
+        score.m_nSeason = nValue;
+
+        score.sortNames();
+        mapInfo[score.getKey()] = score;        
+    }
+
+    std::vector<std::string> vecKeys;
+    for(auto& it : mapInfo)
+    {
+        if(it.second.m_nSeason == 1)
+            vecKeys.push_back(it.first);
+    }
+
+    for(int i = 0; i < vecKeys.size(); i++)
+    {
+        mapInfo.erase(vecKeys[i]);
+    }
+
+    for(auto& it : mapInfo)
+    {
+        std::cout << it.first.c_str() << std::endl;
+    }
 }
 
 

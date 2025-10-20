@@ -85,3 +85,5 @@ void test_uint_to_int();
 
 void test_challenge_score();
 
+void test_vec();
+

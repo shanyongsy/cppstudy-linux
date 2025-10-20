@@ -109,8 +109,8 @@ struct  SkillInfo
 struct BHMJ_Challenge_Score
 {
     char m_PlayerName[3][32];
-    uint16_t m_nUseTime;    // 用时
     uint64_t m_nTimestamp;  // 记录的时间戳
+    uint16_t m_nUseTime;    // 用时
     uint16_t m_nSeason;     // 赛季ID
     uint8_t m_nTurn;        // 轮次
     uint8_t m_nLayer;       // 层次
